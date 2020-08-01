@@ -1,4 +1,4 @@
-package com.zhudengkui.helloword;
+package com.zhudengkui.helloworld;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;

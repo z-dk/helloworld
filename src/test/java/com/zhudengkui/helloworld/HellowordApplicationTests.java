@@ -1,4 +1,4 @@
-package com.zhudengkui.helloword;
+package com.zhudengkui.helloworld;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

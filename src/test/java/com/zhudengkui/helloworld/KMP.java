@@ -1,4 +1,4 @@
-package com.zhudengkui.helloword;
+package com.zhudengkui.helloworld;
 
 /**
  * <b>类 名 称</b> :  KMP<br/>
