@@ -44,6 +44,7 @@ public class CodeGenerator {
         //数据表配置
         StrategyConfig sc = new StrategyConfig();
         sc.setInclude(tableName);
+        sc.setNaming(NamingStrategy.underline_to_camel);
         mpg.setStrategy(sc);
         
         // 包配置

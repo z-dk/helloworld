@@ -1,5 +1,7 @@
 package com.zhudengkui.helloworld.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 import java.io.Serializable;
 
@@ -24,9 +26,11 @@ public class User implements Serializable {
      */
     private String remark;
 
-    private LocalDateTime create_time;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalDateTime createTime;
 
-    private LocalDateTime update_time;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalDateTime updateTime;
 
 
     public String getId() {
@@ -53,20 +57,21 @@ public class User implements Serializable {
         this.remark = remark;
     }
 
-    public LocalDateTime getCreate_time() {
-        return create_time;
+    @JsonFormat
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(LocalDateTime create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
 
-    public LocalDateTime getUpdate_time() {
-        return update_time;
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(LocalDateTime update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
@@ -75,8 +80,8 @@ public class User implements Serializable {
         "id=" + id +
         ", name=" + name +
         ", remark=" + remark +
-        ", create_time=" + create_time +
-        ", update_time=" + update_time +
+        ", createTime=" + createTime +
+        ", updateTime=" + updateTime +
         "}";
     }
 }

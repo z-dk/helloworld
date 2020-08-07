@@ -29,7 +29,7 @@ public class UserController {
     public PagingResponse<User> listUser(@RequestBody UserVo userVo){
         PagingResponse<User> result = new PagingResponse<>();
         try {
-            result.setRows(userService.list());
+            result.setRows(userService.listUserByPage(userVo));
             result.setTotal(userService.countUserByPage(userVo));
             result.setFlag(true);
         } catch (Exception e){
