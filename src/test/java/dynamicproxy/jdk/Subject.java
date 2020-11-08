@@ -1,4 +1,4 @@
-package dynimicproxy.jdk;
+package dynamicproxy.jdk;
 
 public interface Subject {
     

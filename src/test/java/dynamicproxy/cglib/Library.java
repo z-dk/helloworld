@@ -1,4 +1,4 @@
-package dynimicproxy.cglib;
+package dynamicproxy.cglib;
 
 /**
  * <b>类 名 称</b> :  Library<br/>

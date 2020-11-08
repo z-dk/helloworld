@@ -1,4 +1,4 @@
-package dynimicproxy.cglib;
+package dynamicproxy.cglib;
 
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;

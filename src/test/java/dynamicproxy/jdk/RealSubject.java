@@ -1,4 +1,4 @@
-package dynimicproxy.jdk;
+package dynamicproxy.jdk;
 
 /**
  * <b>类 名 称</b> :  RealSubject<br/>
