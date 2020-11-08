@@ -1,7 +1,5 @@
 package dynimicproxy.cglib;
 
-import org.springframework.cglib.proxy.Enhancer;
-
 /**
  * <b>类 名 称</b> :  Main<br/>
  * <b>类 描 述</b> :  <br/>
@@ -14,7 +12,7 @@ import org.springframework.cglib.proxy.Enhancer;
 public class Main {
     
     public static void main(String[] args) {
-        Library target = BuyBookCglib.getProxy(Library.class);
+        Library target = BuyBookCglib.getProxy();
         boolean flag = target.buyBook(5);
     }
     

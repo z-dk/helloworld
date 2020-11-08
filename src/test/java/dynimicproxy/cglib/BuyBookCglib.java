@@ -17,11 +17,11 @@ import java.lang.reflect.Method;
  */
 public class BuyBookCglib implements MethodInterceptor {
     
-    static <T>T getProxy(Class<T> clazz){
+    static Library getProxy(){
         Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(clazz);
+        enhancer.setSuperclass(Library.class);
         enhancer.setCallback(new BuyBookCglib());
-        return clazz.cast(enhancer.create());
+        return (Library) enhancer.create();
     }
     
     @Override
