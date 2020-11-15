@@ -61,7 +61,18 @@
             <artifactId>zkclient</artifactId>
             <version>0.10</version>
         </dependency>
-
+        <!--excel文件内容读取-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+        <!--汉字转拼音-->
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.0</version>
+        </dependency>
 
 
     </dependencies>
