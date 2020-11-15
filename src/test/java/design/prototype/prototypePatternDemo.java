@@ -9,7 +9,7 @@ package design.prototype;
  * <b>修改时间</b> :  2019/9/27 16:06<br/>
  * <b>修改备注</b> :
  */
-public class prototypePattrenDemo {
+public class prototypePatternDemo {
     public static void main(String[] args) {
         ShapeCache.loadCache();
         
