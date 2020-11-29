@@ -2,6 +2,8 @@ package base.basedatatype;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import edu.princeton.cs.algs4.StdOut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
  * <b>类 名 称</b> :  StringTest<br/>
@@ -14,10 +16,30 @@ import edu.princeton.cs.algs4.StdOut;
  */
 public class StringTest {
     public static void main(String[] args) {
+        forTest();
+        String s = "123";
+        Integer integer = Integer.valueOf(s);
+        Integer i = Integer.parseInt(s);
+        System.out.println(i);
+    }
+    
+    public static void forTest() {
+        
+        for (int i = 0; ; ++i) {
+            System.out.println(i);
+            if (i > 10) {
+                break;
+            }
+        }
+        
+    }
+    
+    public static void test() {
         String a = "a";
         String b = "b";
         String c = a+b;
         boolean flag = a+b == a+b;
         System.out.println(flag);
     }
+    
 }

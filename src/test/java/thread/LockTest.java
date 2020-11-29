@@ -1,6 +1,7 @@
 package thread;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * <b>类 名 称</b> :  LockTest<br/>
@@ -15,8 +16,8 @@ public class LockTest {
     
     public static void main(String[] args) {
         try {
-            test();
-        } catch (InterruptedException e) {
+            countDownLatchTest();
+        } catch (InterruptedException | BrokenBarrierException e) {
             e.printStackTrace();
         }
     }
@@ -32,8 +33,31 @@ public class LockTest {
         ThreadLocal<String> stringThreadLocal = new ThreadLocal<>();
         stringThreadLocal.set("111");
         System.out.println(stringThreadLocal.get());
+    }
     
-        CountDownLatch latch = new CountDownLatch(3);
-        latch.await();
+    public static void countDownLatchTest() throws InterruptedException, BrokenBarrierException {
+        AtomicReference<CountDownLatch> latch = new AtomicReference<>(new CountDownLatch(2));
+        
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(() -> {
+            int i = 1;
+            while (true) {
+                System.out.println(i);
+                latch.get().countDown();
+                latch.get().await();
+                latch.set(new CountDownLatch(1));
+                i++;
+            }
+        });
+        executorService.submit(() -> {
+            Character i = 'A';
+            while (true) {
+                latch.get().countDown();
+                latch.get().await();
+                System.out.println(i);
+                latch.set(new CountDownLatch(1));
+                i++;
+            }
+        });
     }
 }

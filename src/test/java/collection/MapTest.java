@@ -15,13 +15,20 @@ import java.util.Map;
 public class MapTest {
     
     public static void main(String[] args) {
-        Map<String,String> map = new HashMap<>(16);
+        hashMapResize();
+    }
+    
+    private static void entryTest(Map<String,? super String> map) {
         map.put("1111","14");
         map.forEach((k,v) -> System.out.println(k+":"+v));
     }
     
-    private static void entryTest(Map<String,? super String> map) {
-        
+    public static void hashMapResize() {
+        Map<String,String> map = new HashMap<>(16);
+        for (int i = 0; i < 100; i++) {
+            map.put("key:"+i,"value:"+i);
+            System.out.println(i);
+        }
     }
     
 }
