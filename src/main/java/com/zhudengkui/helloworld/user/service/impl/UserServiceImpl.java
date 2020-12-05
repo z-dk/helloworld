@@ -2,14 +2,12 @@ package com.zhudengkui.helloworld.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhudengkui.helloworld.user.entity.User;
 import com.zhudengkui.helloworld.user.entity.UserVo;
 import com.zhudengkui.helloworld.user.mapper.UserMapper;
 import com.zhudengkui.helloworld.user.service.UserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * <p>
@@ -22,12 +20,16 @@ import java.util.List;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
-    public List<User> listUserByPage(UserVo userVo){
-        Page<User> page = new Page<>();
-        
+    public Page<User> pageUserByParam(UserVo userVo){
         QueryWrapper<User> wrapper = new QueryWrapper<>(userVo.getUser());
-        Page<User> userPage = getBaseMapper().selectPage(page, wrapper);
-        return userPage.getRecords();
+        Page<User> page = new Page<>();
+        if (userVo.getPagingFlag()) {
+            page.setPages(userVo.getPage());
+            page.setSize(userVo.getRows());
+            return page(page, wrapper);
+        }
+        page.setRecords(list(wrapper));
+        return page;
     }
     
     @Override
