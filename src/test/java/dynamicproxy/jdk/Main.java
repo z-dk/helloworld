@@ -16,10 +16,8 @@ public class Main {
     
     public static void main(String[] args) {
         RealSubject realSubject = new RealSubject();
-        InvocationHandler handler = new DynamicSubject(realSubject);
-        Class<? extends RealSubject> subjectClass = realSubject.getClass(); 
     
-        Subject subject = (Subject) Proxy.newProxyInstance(subjectClass.getClassLoader(), subjectClass.getInterfaces(), handler);
+        Subject subject = (Subject) new DynamicSubject().getProxy(realSubject);
         subject.request();
     }
     

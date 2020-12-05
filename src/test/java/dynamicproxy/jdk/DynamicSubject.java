@@ -2,6 +2,7 @@ package dynamicproxy.jdk;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * <b>类 名 称</b> :  DynamicSubject<br/>
@@ -16,18 +17,16 @@ public class DynamicSubject implements InvocationHandler {
     
     private Object subject;
     
-    public DynamicSubject(Object subject) {
-        this.subject = subject;
-    }
-    
-    DynamicSubject() {
+    public Object getProxy(Object target) {
+        subject = target;
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(),target.getClass().getInterfaces(),this);
     }
     
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("准备调用方法：" + method);
-        method.invoke(subject,args);
+        Object result = method.invoke(subject, args);
         System.out.println("方法调用结束：" + method);
-        return null;
+        return result;
     }
 }

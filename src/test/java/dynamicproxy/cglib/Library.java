@@ -16,6 +16,11 @@ public class Library {
         return true;
     }
     
+    public boolean sellBook(int num) {
+        System.out.println("卖书成功！" + num);
+        return true;
+    }
+    
     @Override
     public String toString(){
         return "被代理的对象：" + getClass();

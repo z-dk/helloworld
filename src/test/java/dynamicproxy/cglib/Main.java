@@ -13,7 +13,8 @@ public class Main {
     
     public static void main(String[] args) {
         Library target = BuyBookCglib.getProxy();
-        boolean flag = target.buyBook(5);
+        boolean flag = target.sellBook(5);
+        target.buyBook(3);
     }
     
 }
