@@ -1,4 +1,4 @@
-package fanxing.base;
+package generic.base;
 
 /**
  * <b>类 名 称</b> :  Parent<br/>
