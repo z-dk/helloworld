@@ -5,7 +5,6 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.StandardCharsets;
 
@@ -31,13 +30,7 @@ public class FileChannelDemo {
         try {
             raf = new RandomAccessFile("E:/environment/java/workSpace/helloword/src/main/resources/static/files/NIO.txt","rw");
             inChannel = raf.getChannel();
-            ByteBuffer writeBuffer = ByteBuffer.allocate(24);
-            writeBuffer.put("new filechannel test".getBytes());
             
-            // 把Buffer变为读模式
-            writeBuffer.flip();
-            // 从buffer中读取数据并写入到Channel中
-            inChannel.write(writeBuffer);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -55,6 +48,20 @@ public class FileChannelDemo {
                     e.printStackTrace();
                 }
             }
+        }
+        // try with resource方式实现--优雅地--关闭资源
+        String path = "E:/environment/java/workSpace/helloword/src/main/resources/static/files/NIO.txt";
+        try(RandomAccessFile randomAccessFile = new RandomAccessFile(path,"rw");
+                 FileChannel fileChannel = randomAccessFile.getChannel()) {
+            ByteBuffer writeBuffer = ByteBuffer.allocate(24);
+            writeBuffer.put("new filechannel test".getBytes());
+    
+            // 把Buffer变为读模式
+            writeBuffer.flip();
+            // 从buffer中读取数据并写入到Channel中
+            fileChannel.write(writeBuffer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     
