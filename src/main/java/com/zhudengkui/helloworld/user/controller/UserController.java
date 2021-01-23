@@ -7,10 +7,7 @@ import com.zhudengkui.helloworld.user.entity.User;
 import com.zhudengkui.helloworld.user.entity.UserVo;
 import com.zhudengkui.helloworld.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -29,6 +26,7 @@ public class UserController {
     @Autowired
     UserService userService;
     
+    @CrossOrigin(origins = "*")
     @RequestMapping("list")
     public PagingResponse<User> listUser(@RequestBody UserVo userVo, @RequestParam Map<String,String> param){
         PagingResponse<User> result = new PagingResponse<>();
