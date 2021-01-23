@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
  * @author zdk
  * @since 2020-08-01
  */
+@SuppressWarnings("unused")
 public class User implements Serializable {
 
     private static final long serialVersionUID=1L;
@@ -25,12 +26,10 @@ public class User implements Serializable {
      * 备注
      */
     private String remark;
-
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
-
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
 

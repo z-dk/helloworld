@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Override
     public Page<User> pageUserByParam(UserVo userVo){
         QueryWrapper<User> wrapper = new QueryWrapper<>(userVo.getUser());
         Page<User> page = new Page<>();

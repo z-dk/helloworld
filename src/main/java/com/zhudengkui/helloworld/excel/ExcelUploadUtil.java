@@ -1,16 +1,15 @@
 package com.zhudengkui.helloworld.excel;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
+/**
+ * @author z_dk
+ */
 public class ExcelUploadUtil {
 	
 
@@ -19,11 +18,12 @@ public class ExcelUploadUtil {
 	 */
 	public static String getCellValue(Cell cell) throws Exception{
 		String value;
-		if(cell==null){			//判断单元格不存在
+        // 判断单元格不存在
+		if(cell==null){
 			return null;
 		}
-		switch (cell.getCellType()) {
-			case HSSFCell.CELL_TYPE_NUMERIC: // 数字
+		switch (cell.getCellTypeEnum()) {
+            case NUMERIC:
 				//如果为时间格式的内容
 				if(HSSFDateUtil.isCellDateFormatted(cell)) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -33,13 +33,13 @@ public class ExcelUploadUtil {
 					value = new DecimalFormat("##########.##########").format(cell.getNumericCellValue());
 				}
 				break;
-		  case HSSFCell.CELL_TYPE_STRING: // 字符串
+            case STRING:
 		      value = cell.getStringCellValue();
 		      break;
-		  case HSSFCell.CELL_TYPE_BOOLEAN: // Boolean
+		  case BOOLEAN:
 		      value = cell.getBooleanCellValue() + "";
 		      break;
-		  case HSSFCell.CELL_TYPE_FORMULA: // 公式
+		  case FORMULA:
 			  try{
 				  if(cell.getNumericCellValue()!=0){
 					  DecimalFormat df = new DecimalFormat("#.00000");
@@ -58,10 +58,10 @@ public class ExcelUploadUtil {
 				  }
               }
 		      break;
-		  case HSSFCell.CELL_TYPE_BLANK: // 空值
+		  case BLANK:
 		      value = "";
 		      break;
-		  case HSSFCell.CELL_TYPE_ERROR: // 故障
+		  case ERROR:
 		      value = "非法字符";
 		      break;
 		  default:
@@ -75,17 +75,15 @@ public class ExcelUploadUtil {
 	 * 获取出现错误的提示行数
 	 */
 	public static StringBuilder getPromptMsg(int rowNum, int cellNum) throws Exception{
-		StringBuilder initPromptMsg = new StringBuilder().append("第").append(rowNum+1).append("行,第")
-				.append(cellNum).append("个单元格:");
-		return initPromptMsg;
+        return new StringBuilder().append("第").append(rowNum+1).append("行,第")
+                .append(cellNum).append("个单元格:");
 	}
 	
 	/**
 	 * 获取出现错误的提示行数
 	 */
 	public static StringBuilder getPromptRowMsg(int rowNum) throws Exception{
-		StringBuilder initPromptMsg = new StringBuilder().append("第").append(rowNum+1).append("行:");
-		return initPromptMsg;
+        return new StringBuilder().append("第").append(rowNum+1).append("行:");
 	}
 	
 	/**
@@ -93,11 +91,8 @@ public class ExcelUploadUtil {
 	 */
 	public static boolean regexpInt(String number) throws Exception{
 		int length = number.length();
-		if(length > 9){
-			return false;
-		}
-		return true;
-	}
+        return length <= 9;
+    }
     
     
     //	public static Map<String,String> getCodeList(PCode pCodeVo) throws Exception{

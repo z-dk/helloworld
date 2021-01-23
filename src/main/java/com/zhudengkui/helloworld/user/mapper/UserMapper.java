@@ -1,8 +1,7 @@
 package com.zhudengkui.helloworld.user.mapper;
 
-import com.zhudengkui.helloworld.user.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.zhudengkui.helloworld.user.entity.User;
 
 /**
  * <p>
@@ -14,6 +13,17 @@ import org.apache.ibatis.annotations.Mapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
-    public Integer count();
+    /**
+     * 方法描述: 统计数量
+     * @param 
+     * @return java.lang.Integer
+     * @author zdk
+     * <br/><b>创建时间:</b>2021/1/23 18:52
+     * <br/><b>修 改 人:</b>zdk
+     * <br/><b>修改时间:</b>2021/1/23 18:52
+     * @since  1.0.0
+     */
+    @SuppressWarnings("unused")
+    Integer count();
     
 }

@@ -12,6 +12,7 @@ import java.io.Serializable;
  * <b>修 改 人</b> :  zhudengkui<br/>
  * <b>修改时间</b> :  2020/8/2 16:55<br/>
  * <b>修改备注</b> :
+ * @author z_dk
  */
 public class UserVo extends Paging implements Serializable {
     

@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
  * <b>修 改 人</b> :  zhudengkui<br/>
  * <b>修改时间</b> :  2020/12/1 20:13<br/>
  * <b>修改备注</b> :
+ * @author z_dk
  */
 @Configuration
 public class LocalDateTimeSerializerConfig {

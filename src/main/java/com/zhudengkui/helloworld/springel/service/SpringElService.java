@@ -19,8 +19,9 @@ import java.util.stream.Stream;
  * <b>修 改 人</b> :  zhudengkui<br/>
  * <b>修改时间</b> :  2020/11/14 10:29<br/>
  * <b>修改备注</b> :
+ * @author z_dk
  */
-public class SpringELService {
+public class SpringElService {
     
     public static void main(String[] args) {
         List<Order> orders = new ArrayList<Order>(){
@@ -36,7 +37,7 @@ public class SpringELService {
         }};
         
         // 缓存
-        Map<String, Expression> expressionCache = new HashMap<>();
+        Map<String, Expression> expressionCache = new HashMap<>(16);
         
         // 周一、周五的新客
         Predicate<Order> newOrder = order -> order.getNewFlag() && (order.getOrderDate().getDayOfWeek().getValue() == 1 
