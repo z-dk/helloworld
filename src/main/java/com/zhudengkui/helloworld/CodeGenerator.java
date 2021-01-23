@@ -11,7 +11,15 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 
-// 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
+/**
+ * <b>类 名 称</b> :  CodeGenerator<br/>
+ * <b>类 描 述</b> :  <br/>
+ * <b>创建时间</b> :  2021 01 23 9:45<br/>
+ * <b>修 改 人</b> :  zdk<br/>
+ * <b>修改时间</b> :  2021 01 23 9:45<br/>
+ * <b>修改备注</b> :  <br/>
+ * @author  zdk 
+ */
 public class CodeGenerator {
 
     public static void main(String[] args) throws IOException {
@@ -91,14 +99,12 @@ public class CodeGenerator {
      * 读取控制台内容
      * </p>
      */
-    public static String scanner(String tip) {
+    private static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
-        System.out.println(help.toString());
+        System.out.println("请输入" + tip + "：");
         if (scanner.hasNext()) {
             String ipt = scanner.next();
-            if (StringUtils.isNotEmpty(ipt)) {
+            if (StringUtils.isNotBlank(ipt)) {
                 return ipt;
             }
         }
