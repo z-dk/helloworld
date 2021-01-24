@@ -8,7 +8,10 @@ import com.zhudengkui.helloworld.user.entity.UserVo;
 import com.zhudengkui.helloworld.user.mapper.UserMapper;
 import com.zhudengkui.helloworld.user.service.UserService;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
  * <p>
@@ -21,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope("myThreadScope")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-
+    
     @Override
     public Page<User> pageUserByParam(UserVo userVo){
         QueryWrapper<User> wrapper = new QueryWrapper<>(userVo.getUser());
@@ -35,10 +38,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return page;
     }
     
+    @Async
     @Override
-    public Integer countUserByPage(UserVo userVo){
+    public CompletableFuture<Integer> countUserByPage(UserVo userVo){
         QueryWrapper<User> wrapper = new QueryWrapper<>(userVo.getUser());
-        return count(wrapper);
+        return CompletableFuture.completedFuture(count(wrapper));
     }
     
     

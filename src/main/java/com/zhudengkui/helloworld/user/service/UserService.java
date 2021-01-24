@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhudengkui.helloworld.user.entity.User;
 import com.zhudengkui.helloworld.user.entity.UserVo;
 
+import java.util.concurrent.CompletableFuture;
+
 /**
  * <p>
  *  服务类
@@ -38,6 +40,6 @@ public interface UserService extends IService<User> {
      * @since  1.0.0
      */
     @SuppressWarnings("unused")
-    Integer countUserByPage(UserVo userVo);
+    CompletableFuture<Integer> countUserByPage(UserVo userVo);
     
 }

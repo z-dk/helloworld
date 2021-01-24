@@ -3,13 +3,15 @@ package com.zhudengkui.helloworld.user.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zhudengkui.helloworld.basemodel.PagingResponse;
+import com.zhudengkui.helloworld.basemodel.Response;
 import com.zhudengkui.helloworld.user.entity.User;
 import com.zhudengkui.helloworld.user.entity.UserVo;
 import com.zhudengkui.helloworld.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import javax.annotation.Resource;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /**
  * <p>
@@ -23,17 +25,27 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
     
-    @Autowired
+    @Resource
     UserService userService;
     
     @CrossOrigin(origins = "*")
-    @RequestMapping("list")
-    public PagingResponse<User> listUser(@RequestBody UserVo userVo, @RequestParam Map<String,String> param){
+    @PostMapping("list")
+    public PagingResponse<User> listUser(@RequestBody UserVo userVo){
         PagingResponse<User> result = new PagingResponse<>();
         Page<User> page = userService.pageUserByParam(userVo);
         result.setRows(page.getRecords());
         result.setTotal((int) page.getTotal());
         result.setFlag(true);
+        return result;
+    }
+    
+    @PostMapping("count")
+    public Response getCount(@RequestBody UserVo userVo) throws ExecutionException, InterruptedException {
+        Response result = new Response();
+        CompletableFuture<Integer> countFuture = userService.countUserByPage(userVo);
+        result.setData(countFuture.get());
+        result.setFlag(true);
+        result.setCode(200);
         return result;
     }
 
