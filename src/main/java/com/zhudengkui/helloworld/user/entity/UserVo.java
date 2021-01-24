@@ -3,6 +3,7 @@ package com.zhudengkui.helloworld.user.entity;
 import com.zhudengkui.helloworld.basemodel.Paging;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <b>类 名 称</b> :  UserVo<br/>
@@ -19,6 +20,26 @@ public class UserVo extends Paging implements Serializable {
     private static final long serialVersionUID = 5976641017960190070L;
     
     private User user = new User();
+    
+    private Date createDate;
+    
+    private Date updateDate;
+    
+    public Date getCreateDate() {
+        return createDate;
+    }
+    
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+    
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+    
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
     
     public User getUser() {
         return user;
