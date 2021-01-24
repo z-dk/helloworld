@@ -1,10 +1,12 @@
 package com.zhudengkui.helloworld.config;
 
+import com.alibaba.excel.util.DateUtils;
 import com.zhudengkui.helloworld.filter.AuthInterceptor;
 import com.zhudengkui.helloworld.filter.LogFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * <b>类 名 称</b> :  WebConfig<br/>
@@ -30,6 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new DateConverter());
+        registry.addFormatter(new DateFormatter());
     }
     
     @Override
@@ -48,11 +52,10 @@ public class WebConfig implements WebMvcConfigurer {
     }
     
     static class DateConverter implements Converter<String,Date> {
-    
         @Override
         public Date convert(String source) {
             try {
-                return new SimpleDateFormat("yyyy-MM-dd").parse(source);
+                return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(source);
             } catch (ParseException e) {
                 e.printStackTrace();
                 return null;
@@ -60,4 +63,16 @@ public class WebConfig implements WebMvcConfigurer {
         }
     }
     
+    static class DateFormatter implements Formatter<Date> {
+    
+        @Override
+        public Date parse(String text, Locale locale) throws ParseException {
+            return DateUtils.parseDate(text, "yyyy-MM-dd HH:mm:ss");
+        }
+    
+        @Override
+        public String print(Date object, Locale locale) {
+            return DateUtils.format(object, "yyyy-MM-dd HH:mm:ss");
+        }
+    }
 }
