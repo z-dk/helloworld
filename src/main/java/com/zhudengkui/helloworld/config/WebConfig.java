@@ -1,6 +1,7 @@
 package com.zhudengkui.helloworld.config;
 
 import com.zhudengkui.helloworld.filter.AuthInterceptor;
+import com.zhudengkui.helloworld.filter.LogFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -39,6 +40,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public AuthInterceptor getAuthInterception() {
         return new AuthInterceptor();
+    }
+    
+    @Bean
+    public LogFilter getLogFilter() {
+        return new LogFilter();
     }
     
     static class DateConverter implements Converter<String,Date> {
