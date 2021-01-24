@@ -31,7 +31,6 @@ public class UserController {
     public PagingResponse<User> listUser(@RequestBody UserVo userVo, @RequestParam Map<String,String> param){
         PagingResponse<User> result = new PagingResponse<>();
         try {
-            System.out.println(param.toString());
             Page<User> page = userService.pageUserByParam(userVo);
             result.setRows(page.getRecords());
             result.setTotal((int) page.getTotal());
