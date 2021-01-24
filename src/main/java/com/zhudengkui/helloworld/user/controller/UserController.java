@@ -30,16 +30,10 @@ public class UserController {
     @RequestMapping("list")
     public PagingResponse<User> listUser(@RequestBody UserVo userVo, @RequestParam Map<String,String> param){
         PagingResponse<User> result = new PagingResponse<>();
-        try {
-            Page<User> page = userService.pageUserByParam(userVo);
-            result.setRows(page.getRecords());
-            result.setTotal((int) page.getTotal());
-            result.setFlag(true);
-        } catch (Exception e){
-            e.printStackTrace();
-            result.setFlag(false);
-            result.setMsg(e.getMessage());
-        }
+        Page<User> page = userService.pageUserByParam(userVo);
+        result.setRows(page.getRecords());
+        result.setTotal((int) page.getTotal());
+        result.setFlag(true);
         return result;
     }
 
