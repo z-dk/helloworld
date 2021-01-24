@@ -42,4 +42,15 @@ public interface UserService extends IService<User> {
     @SuppressWarnings("unused")
     CompletableFuture<Integer> countUserByPage(UserVo userVo);
     
+    /**
+     * 方法描述: 通过id获取用户数据
+     * @param id 用户id
+     * @return com.zhudengkui.helloworld.user.entity.User
+     * @author zdk
+     * <br/><b>创建时间:</b>2021/1/24 17:37
+     * <br/><b>修 改 人:</b>zdk
+     * <br/><b>修改时间:</b>2021/1/24 17:37
+     * @since  1.0.0
+     */
+    public User getUserById(String id);
 }

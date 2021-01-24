@@ -7,6 +7,9 @@ import com.zhudengkui.helloworld.user.entity.User;
 import com.zhudengkui.helloworld.user.entity.UserVo;
 import com.zhudengkui.helloworld.user.mapper.UserMapper;
 import com.zhudengkui.helloworld.user.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,8 @@ import java.util.concurrent.CompletableFuture;
 @Scope("myThreadScope")
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+    
     @Override
     public Page<User> pageUserByParam(UserVo userVo){
         QueryWrapper<User> wrapper = new QueryWrapper<>(userVo.getUser());
@@ -36,6 +41,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         page.setRecords(list(wrapper));
         return page;
+    }
+    
+    @Cacheable(value = "user", key = "#id")
+    @Override
+    public User getUserById(String id) {
+        LOGGER.info("通过用户id【{}】从Mysql查询用户信息", id);
+        return getById(id);
     }
     
     @Async
