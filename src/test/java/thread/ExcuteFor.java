@@ -1,7 +1,10 @@
 package thread;
 
-import java.util.*;
-import java.util.concurrent.Executor;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -19,7 +22,14 @@ public class ExcuteFor {
     public static void main(String[] args) {
         Map<String,String> result = new HashMap<>();
     
-        ExecutorService executor = Executors.newFixedThreadPool(3);// 启用多线程
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        Executors.newCachedThreadPool();
+        Executors.newScheduledThreadPool(5);
+        Executors.newSingleThreadExecutor();
+        Executors.newSingleThreadScheduledExecutor();
+        Executors.newWorkStealingPool();
+        Callable<Object> callable = Executors.callable(() -> System.out.println(System.currentTimeMillis()));
+        
         
         List<String> list = new ArrayList<>();
         list.add("1111111111");
