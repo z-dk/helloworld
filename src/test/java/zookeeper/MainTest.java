@@ -3,6 +3,7 @@ package zookeeper;
 import org.apache.zookeeper.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -34,6 +35,9 @@ public class MainTest {
         countDownLatch.await();
         String s = zooKeeper.create("/zdk", "zdk".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         System.out.println(s);
+    
+        List<String> children = zooKeeper.getChildren("/", false);
+        System.out.println(children);
         zooKeeper.close();
     }
     
