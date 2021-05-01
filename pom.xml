@@ -11,7 +11,7 @@
     <groupId>com.zhudengkui</groupId>
     <artifactId>helloword</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>helloword</name>
+    <name>hello-world</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
