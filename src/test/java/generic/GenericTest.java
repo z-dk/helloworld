@@ -22,8 +22,8 @@ public class GenericTest {
     private Map<String, Integer> map;
     
     public static void main(String[] args) throws NoSuchFieldException {
-        //getGenericType();
-        getGenericField();
+        getGenericType();
+        //getGenericField();
     }
     
     public static void getGenericType() {
