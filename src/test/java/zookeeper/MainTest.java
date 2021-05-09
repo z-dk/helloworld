@@ -17,11 +17,11 @@ import java.util.concurrent.CountDownLatch;
  */
 public class MainTest {
     
-    private static final String ZK_ADD = "39.107.107.102:2181";
+    private static final String ZK_ADD = "127.0.0.1:2181";
     
     private static final int TIME_OUT = 5000;
     
-    private static CountDownLatch countDownLatch = new CountDownLatch(1);
+    private static final CountDownLatch countDownLatch = new CountDownLatch(1);
     
     public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
         

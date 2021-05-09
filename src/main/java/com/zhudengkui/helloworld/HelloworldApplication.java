@@ -13,10 +13,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @MapperScan("com.zhudengkui.helloworld.**.mapper")
 @EnableLog
 @EnableAsync
-public class HellowordApplication {
+public class HelloworldApplication {
     
     public static void main(String[] args) {
-        SpringApplication.run(HellowordApplication.class, args);
+        SpringApplication.run(HelloworldApplication.class, args);
     }
     
 }
