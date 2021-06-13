@@ -1,0 +1,16 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /provider
+    
+dubbo:
+  application:
+    name: hello-provider
+  registry:
+    address: 127.0.0.1:2181
+    protocol: zookeeper
+  protocol:
+    name: dubbo
+    port: 20880
+#  monitor:
+#    protocol: registry
