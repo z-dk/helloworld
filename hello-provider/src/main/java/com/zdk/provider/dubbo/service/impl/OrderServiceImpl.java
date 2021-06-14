@@ -1,4 +1,4 @@
-package com.zdk.provider.service.impl;
+package com.zdk.provider.dubbo.service.impl;
 
 import com.zdk.client.dubbo.service.OrderService;
 import org.slf4j.Logger;

@@ -22,7 +22,8 @@ public class MainTest {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
     
-    private static final String ZK_ADD = "39.107.107.102:2181";
+    //private static final String ZK_ADD = "39.107.107.102:2181";
+    private static final String ZK_ADD = "127.0.0.1:2181";
     
     private static final int TIME_OUT = 5000;
     
@@ -66,23 +67,49 @@ public class MainTest {
     public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
         
         countDownLatch.await();
-        String s = zooKeeper.create("/zdk", "zdk".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
-        LOGGER.info(s);
+        System.out.println(printPath("/dubbo", 0));
+    }
     
-        List<String> children = zooKeeper.getChildren("/", false);
-        LOGGER.info(children.toString());
-        
-        if (zooKeeper.exists("/zdk", false) != null) {
-            LOGGER.info(getZKData("/zdk"));
+    public static String printPath(String path, int depth) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            sb.append("  ");
         }
-        
-        zooKeeper.close();
+        sb.append(path).append(":").append(getZKData(path)).append("\n");
+        List<String> children = null;
+        try {
+            children = getChildren(path);
+        } catch (InterruptedException e) {
+            LOGGER.error("获取【{}】子节点InterruptedException异常", path, e);
+        } catch (KeeperException e) {
+            LOGGER.error("获取【{}】子节点KeeperException异常", path, e);
+        }
+        if (children != null && children.size() > 0) {
+            children.forEach(child -> sb.append(printPath(path+"/"+child, depth+1)));
+        }
+        return sb.toString();
     }
     
     public static String getZKData(String path) {
         try {
             byte[] data = zooKeeper.getData(path, false, new Stat());
             return new String(data);
+        } catch (KeeperException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static List<String> getChildren(String path) throws InterruptedException, KeeperException {
+        return zooKeeper.getChildren(path, false);
+    }
+    
+    public static String setZKData(String path, String value) {
+        try {
+            String rs = zooKeeper.create(path, value.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, 
+                    CreateMode.PERSISTENT_SEQUENTIAL);
+            LOGGER.info("【{}】设置值【{}】成功", path, rs);
+            return rs;
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package com.zdk.consumer.controller;
+package com.zdk.consumer.dubbo.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.zdk.client.dubbo.service.OrderService;

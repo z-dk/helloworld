@@ -1,4 +1,4 @@
-package com.zdk.consumer.service;
+package com.zdk.consumer.dubbo.service;
 
 import org.springframework.stereotype.Service;
 
