@@ -6,8 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <b>类 名 称</b> :  MainTest<br/>
@@ -67,15 +71,26 @@ public class MainTest {
     public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
         
         countDownLatch.await();
-        System.out.println(printPath("/dubbo", 0));
+        System.out.println(printPath("/", 0));
     }
     
     public static String printPath(String path, int depth) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < depth; i++) {
-            sb.append("  ");
+            sb.append("|  ");
         }
-        sb.append(path).append(":").append(getZKData(path)).append("\n");
+        if ("/".equals(path)) {
+            sb.append("/").append("\n");
+        } else {
+            String zkData = getZKData(path);
+            zkData = zkData == null ? "" : zkData;
+            sb.append("|--[")
+                    .append(new LinkedList<>(Arrays.asList(path.split("/"))).getLast())
+                    .append("]:")
+                    .append(zkData.replaceAll("\n", 
+                            "\n" + Stream.generate(() -> " ").limit(sb.length()).collect(Collectors.joining(""))))
+                    .append("\n");
+        }
         List<String> children = null;
         try {
             children = getChildren(path);
@@ -85,7 +100,7 @@ public class MainTest {
             LOGGER.error("获取【{}】子节点KeeperException异常", path, e);
         }
         if (children != null && children.size() > 0) {
-            children.forEach(child -> sb.append(printPath(path+"/"+child, depth+1)));
+            children.forEach(child -> sb.append(printPath((path+"/"+child).replaceAll("//", "/"), depth+1)));
         }
         return sb.toString();
     }
@@ -93,7 +108,7 @@ public class MainTest {
     public static String getZKData(String path) {
         try {
             byte[] data = zooKeeper.getData(path, false, new Stat());
-            return new String(data);
+            return data==null?"[null]":new String(data);
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
         }
