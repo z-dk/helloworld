@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Cacheable(value = "user", key = "#id")
     @Override
     public User getUserById(String id) {
-        LOGGER.info("通过用户id【{}】从Mysql查询用户信息", id);
+        LOGGER.info("通过用户id【{}】从Mysql查询用户信息,当前执行线程:{}", id, Thread.currentThread().getId());
         return getById(id);
     }
     

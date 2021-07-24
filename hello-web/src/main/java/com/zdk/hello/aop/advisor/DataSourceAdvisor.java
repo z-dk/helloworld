@@ -5,6 +5,7 @@ import org.aopalliance.aop.Advice;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
+import org.springframework.stereotype.Component;
 
 /**
  * <b>类 名 称</b> :  DataSourceAdvisor<br/>
@@ -17,6 +18,7 @@ import org.springframework.aop.aspectj.AspectJExpressionPointcut;
  *
  * @author zdk
  */
+@Component
 public class DataSourceAdvisor implements PointcutAdvisor {
     
     @Override
