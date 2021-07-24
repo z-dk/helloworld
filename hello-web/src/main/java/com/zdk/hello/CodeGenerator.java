@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class CodeGenerator {
 
     public static void main(String[] args) throws IOException {
-        generatorByTableName("user","user");
+        generatorByTableName("role","role");
     }
     
     public static void generatorByTableName(String tableName,String packageName) throws IOException {
@@ -34,7 +34,7 @@ public class CodeGenerator {
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
-        gc.setOutputDir(projectPath + "/src/main/java");
+        gc.setOutputDir(projectPath + "\\hello-web\\src\\main\\java");
         gc.setAuthor("zdk");
         gc.setOpen(false);
         gc.setBaseResultMap(true);
@@ -43,10 +43,10 @@ public class CodeGenerator {
     
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl(properties.getProperty("spring.datasource.url"));
-        dsc.setDriverName(properties.getProperty("spring.datasource.driver-class-name"));
-        dsc.setUsername(properties.getProperty("spring.datasource.data-username"));
-        dsc.setPassword(properties.getProperty("spring.datasource.data-password"));
+        dsc.setUrl("jdbc:mysql://localhost:3306/hello-world?useSSL=false");
+        dsc.setDriverName("com.mysql.jdbc.Driver");
+        dsc.setUsername("root");
+        dsc.setPassword("Mysql@1111");
         mpg.setDataSource(dsc);
     
         //数据表配置
@@ -57,7 +57,7 @@ public class CodeGenerator {
         
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("helloworld."+packageName);
+        pc.setParent("com.zdk.hello.service."+packageName);
         
         mpg.setPackageInfo(pc);
         

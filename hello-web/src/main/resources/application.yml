@@ -5,10 +5,17 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: Mysql@1111
+    datasource1:
+      url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: Mysql@1111
+    
+    datasource2:
+      url: jdbc:mysql://localhost:3306/zdk-data?useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: Mysql@1111
 
   redis:
     host: 127.0.0.1

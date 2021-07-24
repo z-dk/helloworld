@@ -1,7 +1,7 @@
-package com.zdk.hello.user.mapper;
+package com.zdk.hello.service.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zdk.hello.user.entity.User;
+import com.zdk.hello.service.user.entity.User;
 
 /**
  * <p>

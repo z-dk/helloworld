@@ -1,9 +1,9 @@
 package com.zdk.hello.test;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zdk.hello.user.entity.User;
-import com.zdk.hello.user.entity.UserVo;
-import com.zdk.hello.user.service.UserService;
+import com.zdk.hello.service.user.entity.User;
+import com.zdk.hello.service.user.entity.UserVo;
+import com.zdk.hello.service.user.service.UserService;
 import com.zdk.hello.util.aware.MyBeanFactoryAwareUtil;
 import org.springframework.beans.factory.InitializingBean;
 

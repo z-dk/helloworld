@@ -1,12 +1,13 @@
-package com.zdk.hello.user.service.impl;
+package com.zdk.hello.service.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zdk.hello.user.entity.User;
-import com.zdk.hello.user.entity.UserVo;
-import com.zdk.hello.user.mapper.UserMapper;
-import com.zdk.hello.user.service.UserService;
+import com.zdk.hello.annotations.TargetDataSource;
+import com.zdk.hello.service.user.entity.User;
+import com.zdk.hello.service.user.entity.UserVo;
+import com.zdk.hello.service.user.mapper.UserMapper;
+import com.zdk.hello.service.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
@@ -26,6 +27,7 @@ import java.util.concurrent.CompletableFuture;
  */
 @Service
 @Scope("myThreadScope")
+@TargetDataSource(name = TargetDataSource.ZDK_DATA)
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);

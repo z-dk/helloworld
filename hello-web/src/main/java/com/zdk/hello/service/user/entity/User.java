@@ -1,4 +1,4 @@
-package com.zdk.hello.user.entity;
+package com.zdk.hello.service.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

@@ -1,12 +1,12 @@
-package com.zdk.hello.user.controller;
+package com.zdk.hello.service.user.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zdk.hello.basemodel.PagingResponse;
 import com.zdk.hello.basemodel.Response;
-import com.zdk.hello.user.entity.User;
-import com.zdk.hello.user.entity.UserVo;
-import com.zdk.hello.user.service.UserService;
+import com.zdk.hello.service.user.entity.User;
+import com.zdk.hello.service.user.entity.UserVo;
+import com.zdk.hello.service.user.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
