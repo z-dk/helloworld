@@ -1,7 +1,6 @@
 package base.basedatatype;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
-import edu.princeton.cs.algs4.StdOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

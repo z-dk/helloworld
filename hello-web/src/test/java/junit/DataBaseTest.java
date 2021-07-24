@@ -1,7 +1,9 @@
 package junit;
 
 import com.zdk.hello.HelloworldApplication;
+import com.zdk.hello.service.role.entity.Role;
 import com.zdk.hello.service.role.service.RoleService;
+import com.zdk.hello.service.user.entity.User;
 import com.zdk.hello.service.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,24 +51,11 @@ public class DataBaseTest {
      */
     @Test
     public void dataCURD() throws InterruptedException {
-        ExecutorService threadPool = Executors.newFixedThreadPool(2);
-        threadPool.submit(() -> {
-            for (;;) {
-                userService.getUserById("1");
-                System.out.println("user");
-            }
-        });
-        threadPool.submit(() -> {
-            for (;;) {
-                roleService.getRoleById("1");
-                System.out.println("role");
-            }
-        });
-        do {
-            System.out.println("waitting...");
-            Thread.sleep(5000);
-        } while (!threadPool.isTerminated());
-        System.out.println("terminated");
+        
+        User user  = userService.getUserById("1");
+        Role role = roleService.getRoleById("1");
+        System.out.println(user);
+        System.out.println(role);
     }
     
     
