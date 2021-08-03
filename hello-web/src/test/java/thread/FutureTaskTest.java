@@ -16,6 +16,23 @@ import java.util.concurrent.*;
 public class FutureTaskTest {
     
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
+        completableFutureAPI();
+    }
+    
+    public static void completableFutureAPI() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future = new CompletableFuture<>();
+        
+        CompletableFuture.supplyAsync(() -> 1)
+                .thenApply(i -> i*i)
+                .thenAccept(System.out::println);
+        CompletableFuture<String> future1 = CompletableFuture.completedFuture("finish");
+
+        future.handle((str, throwable) -> str);
+        System.out.println(future.complete("finish"));
+        System.out.println(future.get());
+    }
+    
+    public static void executor() throws ExecutionException, InterruptedException, TimeoutException {
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(3);
         executor.submit(() -> System.out.println("hello world!"));
     
