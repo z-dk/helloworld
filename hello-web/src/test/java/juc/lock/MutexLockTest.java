@@ -1,4 +1,4 @@
-package lock;
+package juc.lock;
 
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
