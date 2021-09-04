@@ -1,5 +1,7 @@
 package juc.lock.wait;
 
+import juc.lock.condition.ProductLock;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,12 +19,23 @@ import java.util.concurrent.Executors;
 public class Main {
 
     public static void main(String[] args) {
-        Product product = new Product();
+        Product product = productLock();
+        
+        @SuppressWarnings("unused")
+        Product productSync = productSync();
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         executorService.submit(new Producer(product));
         executorService.submit(new Consumer(product));
         executorService.shutdown();
+    }
+    
+    public static Product productSync() {
+        return new ProductSync();
+    }
+    
+    public static Product productLock() {
+        return new ProductLock();
     }
     
 }
