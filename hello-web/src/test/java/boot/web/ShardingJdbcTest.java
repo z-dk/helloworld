@@ -3,14 +3,12 @@ package boot.web;
 import com.zdk.hello.HelloworldApplication;
 import com.zdk.hello.service.province.entity.Province;
 import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
-import com.zdk.hello.service.province.mapper.ProvinceMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
 import java.util.Random;
 
 /**
@@ -31,30 +29,21 @@ public class ShardingJdbcTest {
     @Autowired
     ProvinceExtendMapper provinceExtendMapper;
     
-    @Resource
-    ProvinceMapper provinceMapper;
-    
     @Test
     public void insertCity() {
         Province province = new Province();
-        province.setProvinceId(2);
-        province.setCityId(12);
-        province.setProvinceName("2号");
-        province.setCityName("12号");
+        province.setProvinceId(1);
+        province.setCityId(11);
+        province.setProvinceName("1号");
+        province.setCityName("11号");
         province.setId(new Random().nextInt());
         int insert = provinceExtendMapper.insertProvince(province);
         System.out.println(insert);
-    }
+    }    
     
     @Test
-    public void insertCity2() {
-        Province province = new Province();
-        province.setProvinceId(2);
-        province.setCityId(12);
-        province.setProvinceName("2号");
-        province.setCityName("12号");
-        province.setId(new Random().nextInt());
-        int insert = provinceMapper.insert(province);
+    public void count() {
+        int insert = provinceExtendMapper.count();
         System.out.println(insert);
     }
     
