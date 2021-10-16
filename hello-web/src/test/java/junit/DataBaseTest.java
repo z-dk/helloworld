@@ -51,20 +51,20 @@ public class DataBaseTest {
     public void dataCURD() throws InterruptedException {
         ExecutorService threadPool = Executors.newFixedThreadPool(2);
         threadPool.submit(() -> {
-            for (;;) {
+            for (int i = 0; i < 10; i++) {
                 userService.getUserById("1");
                 System.out.println("user");
             }
         });
         threadPool.submit(() -> {
-            for (;;) {
+            for (int i = 0; i < 10; i++) {
                 roleService.getRoleById("1");
                 System.out.println("role");
             }
         });
         do {
-            System.out.println("waitting...");
-            Thread.sleep(5000);
+            System.out.println("waiting...");
+            Thread.sleep(500);
         } while (!threadPool.isTerminated());
         System.out.println("terminated");
     }

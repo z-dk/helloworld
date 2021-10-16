@@ -3,7 +3,10 @@ server:
   servlet:
     context-path: /hello
 
+
 spring:
+  profiles:
+    include: sharding
   datasource:
     datasource1:
       url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
@@ -22,3 +25,5 @@ spring:
     port: 6379
     password: Zdk@2020
     database: 0
+mybatis-plus:
+  mapper-locations: 

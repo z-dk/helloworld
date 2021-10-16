@@ -40,12 +40,15 @@ public class DataSourceConfig {
     @Resource
     private DataBase2Properties dataBase2Properties;
     
+    @Resource
+    private DataSource shardingDataSource;
+    
     @Bean
     public DataSource helloWorldDataSource() {
         return getDataSource(dataBase1Properties.getUrl(), dataBase1Properties.getUsername(), 
                 dataBase1Properties.getPassword(), dataBase1Properties.getDriverClassName());
     }
-
+    
     @Bean
     public DataSource zdkDataDataSource() {
         return getDataSource(dataBase2Properties.getUrl(), dataBase2Properties.getUsername(), 
@@ -57,6 +60,7 @@ public class DataSourceConfig {
         DynamicDataSource dataSource = new DynamicDataSource();
         Map<Object, Object> targetDataSource = new HashMap<>(16);
         targetDataSource.put("hello-world", helloWorldDataSource());
+        targetDataSource.put("hello-world-sharding", shardingDataSource);
         targetDataSource.put("zdk-data", zdkDataDataSource());
         dataSource.setTargetDataSources(targetDataSource);
         dataSource.setDefaultTargetDataSource(helloWorldDataSource());

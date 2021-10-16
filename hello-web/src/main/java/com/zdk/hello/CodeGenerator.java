@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class CodeGenerator {
 
     public static void main(String[] args) throws IOException {
-        generatorByTableName("role","role");
+        generatorByTableName("province","province");
     }
     
     public static void generatorByTableName(String tableName,String packageName) throws IOException {

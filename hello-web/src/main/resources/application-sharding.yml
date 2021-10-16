@@ -1,0 +1,32 @@
+db:
+  one: primary
+  two: secondary
+spring:
+  shardingsphere:
+    datasource:
+      names: ${db.one},${db.two}
+      primary:
+        type: com.zaxxer.hikari.HikariDataSource
+        jdbc-url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
+        username: root
+        password: Mysql@1111
+        max-active: 16
+      secondary:
+        type: com.zaxxer.hikari.HikariDataSource
+        jdbc-url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
+        username: root
+        password: Mysql@1111
+        max-active: 16
+    sharding:
+      tables:
+        province:
+          actual-data-nodes: ${db.one}.province_$->{1..2}
+          table-strategy:
+            inline:
+              sharding-column: province_id
+              algorithm-expression: province_$->{province_id}
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+        role:
+          actual-data-nodes: ${db.two}.role

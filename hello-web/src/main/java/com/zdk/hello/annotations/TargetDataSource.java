@@ -14,6 +14,8 @@ public @interface TargetDataSource {
     
     String HELLO_WORLD = "hello-world";
     
+    String HELLO_WORLD_SHARDING = "hello-world-sharding";
+    
     String ZDK_DATA = "zdk-data";
     
 }
