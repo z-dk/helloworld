@@ -31,8 +31,9 @@ public class DataSourceExchange implements MethodBeforeAdvice, AfterReturningAdv
         if (method.isAnnotationPresent(TargetDataSource.class)) {
             targetDataSource = method.getAnnotation(TargetDataSource.class);
             DataSourceHolder.setDataSources(targetDataSource.name());
-        } else if (target.getClass().isAnnotationPresent(TargetDataSource.class)) {
-            targetDataSource = target.getClass().getAnnotation(TargetDataSource.class);
+        } else if (method.getDeclaringClass().isAnnotationPresent(TargetDataSource.class)) {
+            // 这里使用method.getDeclaringClass方法获取接口的注解,target获取的为代理类,method.getClass获取的同样为代理类
+            targetDataSource = method.getDeclaringClass().getAnnotation(TargetDataSource.class);
             DataSourceHolder.setDataSources(targetDataSource.name());
         }
     }
