@@ -1,9 +1,11 @@
 package com.zdk.hello.service.province.controller;
 
 
+import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.stereotype.Controller;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -13,9 +15,17 @@ import org.springframework.stereotype.Controller;
  * @author zdk
  * @since 2021-10-14
  */
-@Controller
+@RestController
 @RequestMapping("/province")
 public class ProvinceController {
+    
+    @Resource
+    ProvinceExtendMapper provinceExtendMapper;
+    
+    @RequestMapping("count")
+    public Integer countAll() {
+        return provinceExtendMapper.count();
+    }
 
 }
 

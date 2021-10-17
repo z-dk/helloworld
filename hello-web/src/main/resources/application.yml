@@ -25,3 +25,5 @@ spring:
     port: 6379
     password: Zdk@2020
     database: 0
+mybatis-plus:
+  mapper-locations: classpath*:config/**/mapper/*.xml

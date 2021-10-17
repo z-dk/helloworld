@@ -7,7 +7,7 @@
     </insert>
     
     <select id="count" resultType="java.lang.Integer">
-        select count(*) from province
+        select count(*) from province;
     </select>
 
 </mapper>
