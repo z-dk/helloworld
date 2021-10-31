@@ -43,6 +43,7 @@ public class DelayQueueTest {
             String taskParam = "执行第" + i + "个任务";
             delayTaskQueue.put(new DelayedTask<>(taskParam, 1, function, runTime));
         }
+        delayTaskQueue.put(new DelayedTask<>("-1000任务", 1, function, now-1000));
 
         while (delayTaskQueue.size() != 0) {
             try {

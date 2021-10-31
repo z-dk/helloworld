@@ -65,20 +65,4 @@ public class DelayedTask<T> implements Delayed, Runnable {
             return -1;
         }
     }
-
-    public T getTaskParam() {
-        return taskParam;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public Function<T, String> getFunction() {
-        return function;
-    }
-
-    public Long getRunTime() {
-        return runTime;
-    }
 }
