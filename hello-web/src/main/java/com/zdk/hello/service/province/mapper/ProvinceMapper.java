@@ -20,5 +20,5 @@ public interface ProvinceMapper extends BaseMapper<Province> {
      */
     @Override
     int insert(Province province);
-
+    
 }

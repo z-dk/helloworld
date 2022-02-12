@@ -15,7 +15,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring.boot.version>2.1.7.RELEASE</spring.boot.version>
-        <mybatis.plus.version>3.3.2</mybatis.plus.version>
+        <mybatis.plus.version>3.5.1</mybatis.plus.version>
         <caffeine.version>2.6.0</caffeine.version>
         <mysql.connector.version>5.1.43</mysql.connector.version>
         <sharding-sphere.version>4.0.0-RC1</sharding-sphere.version>
@@ -80,6 +80,13 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis.plus.version}</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>*</artifactId>
+                    <groupId>*</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.velocity</groupId>

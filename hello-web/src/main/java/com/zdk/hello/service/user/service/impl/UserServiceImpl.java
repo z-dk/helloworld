@@ -54,7 +54,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     
     @Async
     @Override
-    public CompletableFuture<Integer> countUserByPage(UserVo userVo){
+    public CompletableFuture<Long> countUserByPage(UserVo userVo){
         QueryWrapper<User> wrapper = new QueryWrapper<>(userVo.getUser());
         return CompletableFuture.completedFuture(count(wrapper));
     }

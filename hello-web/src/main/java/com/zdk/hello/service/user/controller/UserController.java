@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("count")
     public Response getCount(@RequestBody UserVo userVo) throws ExecutionException, InterruptedException {
         Response result = new Response();
-        CompletableFuture<Integer> countFuture = userService.countUserByPage(userVo);
+        CompletableFuture<Long> countFuture = userService.countUserByPage(userVo);
         result.setData(countFuture.get());
         result.setFlag(true);
         result.setCode(200);

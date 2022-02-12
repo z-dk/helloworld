@@ -40,7 +40,7 @@ public interface UserService extends IService<User> {
      * @since  1.0.0
      */
     @SuppressWarnings("unused")
-    CompletableFuture<Integer> countUserByPage(UserVo userVo);
+    CompletableFuture<Long> countUserByPage(UserVo userVo);
     
     /**
      * 方法描述: 通过id获取用户数据
