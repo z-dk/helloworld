@@ -1,5 +1,6 @@
 package com.zdk.hello.config;
 
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zdk.hello.config.datasource.DynamicDataSource;
@@ -8,6 +9,7 @@ import com.zdk.hello.properties.DataBase2Properties;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -30,6 +32,7 @@ import java.util.Map;
  * @author zdk
  */
 @Configuration
+@EnableConfigurationProperties(MybatisPlusProperties.class)
 public class DataSourceConfig {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfig.class);
@@ -39,6 +42,9 @@ public class DataSourceConfig {
     
     @Resource
     private DataBase2Properties dataBase2Properties;
+    
+    @Resource
+    MybatisPlusProperties mybatisPlusProperties;
     
     @Resource
     private DataSource shardingDataSource;
@@ -74,6 +80,8 @@ public class DataSourceConfig {
         sqlSessionFactory.setDataSource(dynamicDataSource());
         // 扫描Model
         sqlSessionFactory.setTypeAliasesPackage("com.zdk.**.entity");
+        // 指定mapperLocations路径,不然xml的sql找不到,我也太牛了吧,这问题都能找到^_^
+        sqlSessionFactory.setMapperLocations(mybatisPlusProperties.resolveMapperLocations());
         return sqlSessionFactory.getObject();
     }
 

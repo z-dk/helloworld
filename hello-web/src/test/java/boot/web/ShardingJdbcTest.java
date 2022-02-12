@@ -3,6 +3,7 @@ package boot.web;
 import com.zdk.hello.HelloworldApplication;
 import com.zdk.hello.service.province.entity.Province;
 import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
+import com.zdk.hello.service.role.mapper.RoleExtendMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class ShardingJdbcTest {
     @Autowired
     ProvinceExtendMapper provinceExtendMapper;
     
+    @Autowired
+    RoleExtendMapper roleExtendMapper;
+    
     @Test
     public void insertCity() {
         Province province = new Province();
@@ -39,11 +43,17 @@ public class ShardingJdbcTest {
         province.setId(new Random().nextInt());
         int insert = provinceExtendMapper.insertProvince(province);
         System.out.println(insert);
-    }    
+    }
     
     @Test
     public void count() {
         int insert = provinceExtendMapper.count();
+        System.out.println(insert);
+    }
+    
+    @Test
+    public void roleCount() {
+        int insert = roleExtendMapper.count();
         System.out.println(insert);
     }
     
