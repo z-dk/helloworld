@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zdk.hello.service.customer.mapper.CustomerMapper">
+    
+    <!--  这里需对加密字段指明typehandler  -->
+    <resultMap id="baseResultMap" type="com.zdk.hello.service.customer.entity.Customer">
+        <id column="id" property="id"/>
+        <result column="customer_name" property="customerName" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" typeHandler="com.zdk.hello.handler.EncryptStringTypeHandler"/>
+        <result column="birthday" property="birthday" />
+    </resultMap>
+    
+    <!--  这里需在加密字段指明typeHandler  -->
+    <insert id="insertCustomer" parameterType="com.zdk.hello.service.customer.entity.Customer">
+        insert into customer(customer_name, phone, address, birthday)
+        value (#{customerName}, #{phone}, #{address, typeHandler=com.zdk.hello.handler.EncryptStringTypeHandler}, 
+               #{birthday})
+    </insert>
+    
+    <!--  这里使用resultMap,其中配置了typeHandler  -->
+    <select id="getCustomerById" resultMap="baseResultMap">
+        select * from customer where id = #{id}
+    </select>
 
 </mapper>

@@ -1,8 +1,10 @@
 package com.zdk.hello.service.customer.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.zdk.hello.handler.EncryptStringTypeHandler;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
  * @author zdk
  * @since 2022-02-13
  */
-@TableName("customer")
+@TableName(value = "customer", autoResultMap = true)
 @ApiModel(value = "Customer对象", description = "客户信息表")
 public class Customer implements Serializable {
 
@@ -29,6 +31,12 @@ public class Customer implements Serializable {
 
     private Long phone;
 
+    /**
+     * 地址,加密处理<br/>
+     * 该注解仅对mybatisplus提供的基本方法生效,且需指明@TableName(autoResultMap = true)<br/>
+     * 自定义sql仍需手动指定typehandler<br/>
+     */
+    @TableField(typeHandler = EncryptStringTypeHandler.class)
     private String address;
 
     private LocalDateTime birthday;

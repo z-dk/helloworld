@@ -1,6 +1,7 @@
 package boot.web;
 
 import com.zdk.hello.HelloworldApplication;
+import com.zdk.hello.service.customer.entity.Customer;
 import com.zdk.hello.service.customer.mapper.CustomerMapper;
 import com.zdk.hello.service.province.entity.Province;
 import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 
 /**
@@ -62,8 +64,25 @@ public class ShardingJdbcTest {
     }
     
     @Test
-    public void customerCount() {
-        System.out.println(customerMapper.selectById(1));
+    public void insertCustomer() {
+        Customer customer = new Customer();
+        customer.setCustomerName("nihao");
+        customer.setAddress("beijing");
+        customer.setBirthday(LocalDateTime.now());
+        customer.setPhone(15535333322L);
+        // 自定义的sql需要自行配置typehandler
+        //Integer integer = customerMapper.insertCustomer(customer);
+        int insert = customerMapper.insert(customer);
+        System.out.println(insert == 1);
+    }
+    
+    @Test
+    public void getCustomer() {
+        // 自定义的sql
+        //Customer customer = customerMapper.getCustomerById(6);
+        // mybatis-plus的sql
+        Customer customer = customerMapper.selectById(6);
+        System.out.println(customer.getAddress());
     }
     
 }

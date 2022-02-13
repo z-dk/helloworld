@@ -28,6 +28,7 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:config/**/mapper/*.xml
+  type-handlers-package: com.zdk.hello.handler
 
 logging:
   level: 
