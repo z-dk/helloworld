@@ -1,6 +1,7 @@
 package boot.web;
 
 import com.zdk.hello.HelloworldApplication;
+import com.zdk.hello.service.customer.mapper.CustomerMapper;
 import com.zdk.hello.service.province.entity.Province;
 import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
 import com.zdk.hello.service.role.mapper.RoleExtendMapper;
@@ -31,7 +32,10 @@ public class ShardingJdbcTest {
     ProvinceExtendMapper provinceExtendMapper;
     
     @Autowired
-    RoleExtendMapper roleExtendMapper;
+    RoleExtendMapper roleExtendMapper;    
+    
+    @Autowired
+    CustomerMapper customerMapper;
     
     @Test
     public void insertCity() {
@@ -55,6 +59,11 @@ public class ShardingJdbcTest {
     public void roleCount() {
         int insert = roleExtendMapper.count();
         System.out.println(insert);
+    }
+    
+    @Test
+    public void customerCount() {
+        System.out.println(customerMapper.selectById(1));
     }
     
 }

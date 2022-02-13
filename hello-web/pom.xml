@@ -80,7 +80,6 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis.plus.version}</version>
-            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <artifactId>*</artifactId>
@@ -163,6 +162,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.69</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.20</version>
         </dependency>
 
 
