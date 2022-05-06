@@ -1,6 +1,7 @@
 package generic;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -21,9 +22,12 @@ public class GenericTest {
     
     private Map<String, Integer> map;
     
-    public static void main(String[] args) throws NoSuchFieldException {
-        getGenericType();
+    public static void main(String[] args) throws Exception {
+        //getGenericType();
         //getGenericField();
+        
+        Integer integer = GenericTest.<Integer>transferNum(9);
+        System.out.println(integer);
     }
     
     public static void getGenericType() {
@@ -75,6 +79,48 @@ public class GenericTest {
     
     public static void test(){
         List<?> p = new ArrayList<>();
+    }
+
+    /**
+     * 泛型方法,将数字转为具体的类型
+     * @param i 数字
+     * @param <K> 需要的数字类型
+     * @return 具体类型的数值
+     */
+    public static <K extends Number>K transferNum(Number i) throws Exception {
+        String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+        System.out.println(methodName);
+        Method declaredMethod = GenericTest.class.getDeclaredMethod(methodName, Number.class);
+        Type genericReturnType = declaredMethod.getGenericReturnType();
+        System.out.println(genericReturnType.getClass());
+        if (genericReturnType == Integer.class) {
+            System.out.println(genericReturnType.getTypeName());
+        }
+        return (K)i;
+    }
+    
+    public static void f() {
+        // 编译通过
+        Object[] array = new String[10];
+        // 编译不通过
+        //ArrayList<Object> list1 = new ArrayList<String>();
+        // 编译不通过
+        //ArrayList<String> list2 = new ArrayList<Object>();
+        
+        // String ≤ Object
+        // 数组的变换f(A) = A[]即:
+        // f(Object) = Object[]    f(String) = String[]
+        // f(String) ≤ f(Object)成立,其具有协变性
+        
+        // ArrayList的变换同理
+        // f(String) = ArrayList<String>    f(Object) = ArrayList<Object>
+        // f(String) ≥ f(Object) 与 f(String) ≤ f(Object)均不成立,故其具有无关性
+        
+        // 编译通过,但运行时抛出异常:java.lang.ArrayStoreException
+        array[0] = 1;
+        // 编译不通过:java中数组和泛型是不能混合使用的,数组要求类型是具象化的,而泛型恰好不是
+        // Generic array creation
+        //List<String>[] genericListArray = new ArrayList<String>[10];
     }
     
 }
