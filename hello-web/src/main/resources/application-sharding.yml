@@ -2,20 +2,32 @@ db:
   one: primary
   two: secondary
 spring:
+  datasource:
+    datasource1:
+      url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: Mysql@1111
+
+    datasource2:
+      url: jdbc:mysql://localhost:3306/zdk-data?useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: Mysql@1111
   shardingsphere:
     datasource:
       names: ${db.one},${db.two}
       primary:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
-        username: root
-        password: Mysql@1111
+        jdbc-url: ${spring.datasource.datasource1.url}
+        username: ${spring.datasource.datasource1.username}
+        password: ${spring.datasource.datasource1.password}
         max-active: 16
       secondary:
         type: com.zaxxer.hikari.HikariDataSource
-        jdbc-url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
-        username: root
-        password: Mysql@1111
+        jdbc-url: ${spring.datasource.datasource1.url}
+        username: ${spring.datasource.datasource1.username}
+        password: ${spring.datasource.datasource1.password}
         max-active: 16
     sharding:
       tables:
