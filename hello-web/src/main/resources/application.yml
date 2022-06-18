@@ -6,13 +6,7 @@ server:
 
 spring:
   profiles:
-    include: sharding
-
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: Zdk@2020
-    database: 0
+    include: sharding-prod
 
 mybatis-plus:
   mapper-locations: classpath*:config/**/mapper/*.xml

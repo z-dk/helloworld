@@ -44,10 +44,10 @@
 				let ua = navigator.userAgent;
 				console.log(ua)
 				this.userAgent = ua;
-				if (ua.indexOf("alipay") !== -1) {
+				if (ua.indexOf("AlipayClient") !== -1) {
 					// 支付宝
 					window.location.href = "https://qr.alipay.com/tsx15523vqzpvtvtwnhnn75"
-				} else if (ua.indexOf("wechat") !== -1) {
+				} else if (ua.indexOf("MicroMessenger") !== -1) {
 					// 微信
 					window.location.href = "wxp://f2f0jbZL_f1Rh957xhpWygXFNxxlZFxKGZBDly0-nasZss5Q2zYrXXiRfF5dWfAZ5ebs"
 				} else {

@@ -2,6 +2,12 @@ db:
   one: primary
   two: secondary
 spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: Zdk@2020
+    database: 0
+  
   datasource:
     datasource1:
       url: jdbc:mysql://localhost:3306/hello-world?useSSL=false
