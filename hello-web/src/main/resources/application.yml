@@ -14,4 +14,4 @@ mybatis-plus:
 
 logging:
   level: 
-    com: debug
+    com: info
