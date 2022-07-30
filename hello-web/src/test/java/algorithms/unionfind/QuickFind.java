@@ -14,14 +14,14 @@ package algorithms.unionfind;
  * @author zdk
  */
 @SuppressWarnings("unused")
-public class QuickFind {
+public class QuickFind implements UnionFindInterface {
     
     /**
-     * 分量id，以触点作为索引
+     * 分量id，以触点作为索引(索引对应值为当前联通图跟节点的索引)
      */
     private int[] id;
     /**
-     * 分量数量
+     * 分量数量(联通图的个数)
      */
     private int count;
     
@@ -32,19 +32,43 @@ public class QuickFind {
             id[i] = i;
         }
     }
-    
+
+    /**
+     * 获取联通图的个数
+     * @return 个数
+     */
+    @Override
     public int count() {
         return count;
     }
-    
+
+    /**
+     * 判断p与q是否联通,即是否在同一联通图上
+     * @param p p节点
+     * @param q q节点
+     * @return 是否联通
+     */
+    @Override
     public boolean connected(int p, int q) {
         return find(p) == find(q);
     }
-    
+
+    /**
+     * 获取p节点所在图的跟节点
+     * @param p p节点
+     * @return 根节点索引
+     */
+    @Override
     public int find(int p) {
         return id[p];
     }
-    
+
+    /**
+     * 联通两个节点
+     * @param p p节点
+     * @param q q节点
+     */
+    @Override
     public void union(int p, int q) {
         int pID = find(p);
         int qID = find(q);

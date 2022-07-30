@@ -2,32 +2,40 @@ package algorithms.unionfind;
 
 /**
  * <b>类 名 称</b> :  QuickUnion<br/>
- * <b>类 描 述</b> :  quick-union算法<br/>
+ * <b>类 描 述</b> :  union-find算法<br/>
  * <b>创 建 人</b> :  zhudengkui<br/>
  * <b>创建时间</b> :  2021/2/27 23:04<br/>
  * <b>修 改 人</b> :  zhudengkui<br/>
  * <b>修改时间</b> :  2021/2/27 23:04<br/>
  * <b>修改备注</b> :  <br/>
- * quick-union算法重点提高了union()方法的速度，它与quick-find算法互补，仅仅是find与union方法实现上的区别
+ * union-find算法(即加权quick-union算法):union中随意将一棵树连到另一颗树,现在我们会记录每棵树的大小,并总是将较小的树连接到较大的树上<br/>
+ * 需要添加一个数组和一些代码来记录树中的节点数
  * @author zdk
  */
 @SuppressWarnings("unused")
-public class QuickUnion implements UnionFindInterface {
+public class UnionFind implements UnionFindInterface {
     
     /**
-     * 分量id，以触点作为索引(索引值存储的是其父节点的索引,根节点为自己)
+     * 分量id，以触点作为索引
      */
     private int[] id;
+
+    /**
+     * 记录每棵树(分量)的大小
+     */
+    private int[] sz;
     /**
      * 分量数量
      */
     private int count;
     
-    public QuickUnion(int n) {
+    public UnionFind(int n) {
         count = n;
         id = new int[n];
+        sz = new int[n];
         for (int i = 0; i < n; i++) {
             id[i] = i;
+            sz[i] = 1;
         }
     }
     
@@ -56,7 +64,13 @@ public class QuickUnion implements UnionFindInterface {
         if (pID == qID) {
             return;
         }
-        id[pID] = qID;
+        if (sz[pID] < sz[qID]) {
+            id[pID] = qID;
+            sz[qID] += sz[pID];
+        } else {
+            id[qID] = pID;
+            sz[pID] += sz[qID];
+        }
         count--;
     }
     
