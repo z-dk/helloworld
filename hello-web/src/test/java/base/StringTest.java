@@ -14,7 +14,19 @@ package base;
 public class StringTest {
 
     public static void main(String[] args) {
-        
+        // 长度6
+        splitTest(",,,,,1");
+        // 长度6
+        splitTest(",,,,,1,,,");
+    }
+    
+    public static void splitTest(String s) {
+        String[] split = s.split(",");
+        System.out.println(split.length);
+        for (String s1 : split) {
+            System.out.println(s1);
+        }
+        System.out.println("end");
     }
     
     public void test() {

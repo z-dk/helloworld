@@ -23,10 +23,13 @@ public class ReadWriteLockDemo {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         
         ReadWriteNum num = new ReadWriteNum();
-        executorService.submit(() -> num.set(new Random().nextInt(1000)));
         for (int i = 0; i < 100; i++) {
             executorService.submit(num::get);
+            if (i % 10 == 0) {
+                executorService.submit(() -> num.set(new Random().nextInt(1000)));
+            }
         }
+        executorService.shutdown();
     }
     
     static class ReadWriteNum {
@@ -40,8 +43,13 @@ public class ReadWriteLockDemo {
             lock.readLock().lock();
             try {
                 System.out.println(Thread.currentThread().getName() + "读:" + number);
+                Thread.sleep(1000);
                 return number;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                return 0;
             } finally {
+                System.out.println("释放读锁");
                 lock.readLock().unlock();
             }
         }
@@ -52,8 +60,12 @@ public class ReadWriteLockDemo {
             try {
                 System.out.println(Thread.currentThread().getName() + "写:" + number);
                 this.number = number;
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             } finally {
                 lock.writeLock().unlock();
+                System.out.println("释放写锁");
             }
         }
     }
