@@ -1,8 +1,6 @@
 package thread.pool;
 
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * <b>类 名 称</b> :  MyThreadPoll<br/>
@@ -16,13 +14,31 @@ import java.util.concurrent.TimeUnit;
  * @author zdk
  */
 public class MyThreadPool {
+
+    /**
+     * 1.线程池中的线程执行中遇到异常会怎样?
+     * 2.execute与submit执行的区别?
+     */
+    static ThreadPoolExecutor executor = new ThreadPoolExecutor(5,10,20, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(5,10,20, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
-        executor.execute(() -> System.out.println("a runnable"));
-        executor.submit(() -> System.out.println("runnable or callable"));
+        runtimeException();
+        executor.shutdown();
+    }
+    
+    public static void runtimeException() throws ExecutionException, InterruptedException {
+        // execute执行的异常会正常打印
+        executor.execute(() -> {
+            throw new NullPointerException("呀,空了耶^_^");
+        });
         
+        // submit提交的任务只有在获取返回值时才会正常获取到异常信息
+        Future<?> submit = executor.submit(() -> {
+            //throw new NullPointerException("submit a NPE");
+            System.out.println("submit is complete");
+        });
+        System.out.println(submit.get());
     }
     
 }
