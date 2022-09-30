@@ -8,6 +8,8 @@ import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
 import com.zdk.hello.service.role.mapper.RoleExtendMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,6 +31,8 @@ import java.util.Random;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {HelloworldApplication.class})
 public class ShardingJdbcTest {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(ShardingJdbcTest.class);
     
     @Autowired
     ProvinceExtendMapper provinceExtendMapper;
@@ -60,7 +64,7 @@ public class ShardingJdbcTest {
     @Test
     public void roleCount() {
         int insert = roleExtendMapper.count();
-        System.out.println(insert);
+        LOGGER.info("count num is {}", insert);
     }
     
     @Test

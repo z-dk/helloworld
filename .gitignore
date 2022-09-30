@@ -30,4 +30,5 @@ build/
 ### VS Code ###
 .vscode/
 /src/main/resources/application.properties
+# 避免线上配置泄漏
 /hello-web/src/main/resources/application-sharding-prod.yml
