@@ -1,5 +1,7 @@
 package com.zdk.hello.spring;
 
+import com.alibaba.fastjson.JSON;
+import com.zdk.hello.spring.event.HelloWorldEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -7,6 +9,7 @@ import org.springframework.context.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringValueResolver;
 
 import java.util.Locale;
@@ -28,20 +31,26 @@ import java.util.Locale;
  *     同时ApplicationContext也实现了BeanFactory，MessageSource，ApplicationEventPublisher等接口，也可以用来做相关接口的事情。<br/>
  * @author zdk
  */
+@Component("awareProcessor")
 public class HelloWorldApplicationContextAwareProcessor implements EnvironmentAware, EmbeddedValueResolverAware,
         ResourceLoaderAware, ApplicationEventPublisherAware, MessageSourceAware, ApplicationContextAware {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HelloWorldApplicationContextAwareProcessor.class);
 
+    private ApplicationContext applicationContext;
+    
     @Override
     public void setEnvironment(Environment environment) {
         // 获取环境数据，
         String[] activeProfiles = environment.getActiveProfiles();
+        LOGGER.info("activeProfiles is [{}]", JSON.toJSONString(activeProfiles));
     }
 
     @Override
     public void setEmbeddedValueResolver(StringValueResolver resolver) {
-        String port = resolver.resolveStringValue("server.port");
+        // 类似@Value注解
+        String port = resolver.resolveStringValue("${server.port}");
+        LOGGER.info("端口号为:{}", port);
     }
 
     @Override
@@ -54,22 +63,24 @@ public class HelloWorldApplicationContextAwareProcessor implements EnvironmentAw
 
     @Override
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
-        applicationEventPublisher.publishEvent(new ApplicationEvent(this) {
-            @Override
-            public Object getSource() {
-                return super.getSource();
-            }
-        });
+        // 获取到该对象之后可用来发布事件
+        applicationEventPublisher.publishEvent(new HelloWorldEvent("setApplicationEventPublisher finish"));
     }
 
     @Override
     public void setMessageSource(MessageSource messageSource) {
-        String hello = messageSource.getMessage("hello", new Object[]{0, 2}, Locale.getDefault());
+        String hello = messageSource.getMessage("welcome.hello", new Object[]{"zdk"}, Locale.getDefault());
+        String us = messageSource.getMessage("welcome.hello", new Object[]{"zdk"}, Locale.US);
+        LOGGER.info("本地的:{}", hello);
+        LOGGER.info("us的:{}", us);
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        String applicationName = applicationContext.getApplicationName();
+        this.applicationContext = applicationContext;
     }
 
+    public ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
 }

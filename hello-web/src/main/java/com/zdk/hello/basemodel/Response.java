@@ -10,13 +10,13 @@ package com.zdk.hello.basemodel;
  * <b>修改备注</b> :
  * @author z_dk
  */
-public class Response {
+public class Response<T> {
     
     private Boolean flag;
     
     private String msg;
     
-    private Object data;
+    private T data;
     
     private Integer code;
     
@@ -36,11 +36,11 @@ public class Response {
         this.msg = msg;
     }
     
-    public Object getData() {
+    public T getData() {
         return data;
     }
     
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
     

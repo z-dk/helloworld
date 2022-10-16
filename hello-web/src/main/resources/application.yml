@@ -6,12 +6,17 @@ server:
 
 spring:
   profiles:
-    include: sharding-prod
+    include: sharding
+  messages:
+    basename: i18n/messages
 
 mybatis-plus:
   mapper-locations: classpath*:config/**/mapper/*.xml
   type-handlers-package: com.zdk.hello.handler
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 logging:
-  level: 
+  level:
     com: info
+  config: classpath:log4j.properties
