@@ -24,7 +24,9 @@ public class AllBeanPostProcessor implements InstantiationAwareBeanPostProcessor
      */
     @Override
     public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-        LOGGER.info("bean[{}] postProcessBeforeInstantiation...", beanName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("bean[{}] postProcessBeforeInstantiation...", beanName);
+        }
         return null;
     }
 
@@ -37,7 +39,9 @@ public class AllBeanPostProcessor implements InstantiationAwareBeanPostProcessor
      */
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
-        LOGGER.info("bean[{}] postProcessAfterInstantiation...", beanName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("bean[{}] postProcessAfterInstantiation...", beanName);
+        }
         return true;
     }
 
@@ -51,7 +55,9 @@ public class AllBeanPostProcessor implements InstantiationAwareBeanPostProcessor
      */
     @Override
     public PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName) throws BeansException {
-        LOGGER.info("bean[{}] postProcessProperties...", beanName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("bean[{}] postProcessProperties...", beanName);
+        }
         return null;
     }
 
@@ -64,7 +70,9 @@ public class AllBeanPostProcessor implements InstantiationAwareBeanPostProcessor
      */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        LOGGER.info("bean[{}] postProcessBeforeInitialization...", beanName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("bean[{}] postProcessBeforeInitialization...", beanName);
+        }
         //return !Objects.equals(beanName, "springBeanLifeCycle") ? bean : null;
         return bean;
     }
@@ -78,7 +86,9 @@ public class AllBeanPostProcessor implements InstantiationAwareBeanPostProcessor
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        LOGGER.info("bean[{}] postProcessAfterInitialization...", beanName);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("bean[{}] postProcessAfterInitialization...", beanName);
+        }
         //return !Objects.equals(beanName, "springBeanLifeCycle") ? bean : null;
         return bean;
     }
