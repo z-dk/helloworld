@@ -1,8 +1,10 @@
 package base.clone;
 
+import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,13 +20,24 @@ import java.util.List;
  */
 public class ListCloneTest {
 
-    public static void main(String[] args) {
-        List<String> list = new ArrayList<>(Arrays.asList("111","222"));
-        List<String> des = shallowListClone(list);
-        des.add("333");
-        des.remove("222");
-        System.out.println("src:" + list);
-        System.out.println("des:" + des);
+    public static void main(String[] args) throws CloneNotSupportedException {
+        //List<String> list = new ArrayList<>(Arrays.asList("111","222"));
+        //List<String> des = shallowListClone(list);
+        //des.add("333");
+        //des.remove("222");
+        //System.out.println("src:" + list);
+        //System.out.println("des:" + des);
+        cloneObject();
+    }
+
+    public static void cloneObject() throws CloneNotSupportedException {
+        MyClone myClone = new MyClone();
+        myClone.setChildren(Lists.newArrayList(23L,35L));
+        myClone.setId(1L);
+        myClone.setName("par");
+        Object clone = myClone.clone();
+        myClone.getChildren().add(45L);
+        System.out.println(JSON.toJSONString(clone));
     }
 
     /**
