@@ -1,5 +1,8 @@
 package juc;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * <b>类 名 称</b> :  Synchronize<br/>
  * <b>类 描 述</b> :  synchronize测试<br/>
@@ -13,6 +16,8 @@ package juc;
  */
 public class Synchronize {
 
+    private static final ExecutorService threadPoolExecutor = Executors.newFixedThreadPool(3);
+
     /**
      * wait/notify方法的调用必须在该对象的锁(Monitor)中,否则抛出IllegalMonitorStateException异常
      * notify方法调用之后只有等待代码退出synchronized块后,其他线程才可以获取到锁
@@ -21,6 +26,27 @@ public class Synchronize {
     private boolean envReady = false;
 
     public static void main(String[] args) {
+        syncTest();
+    }
+
+    private static void syncTest() {
+        threadPoolExecutor.submit(() -> {
+            System.out.println("start");
+            synchronized (Synchronize.class) {
+                try {
+                    // sleep 不会释放锁
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        threadPoolExecutor.submit(Synchronize::syncStaticMethod);
+        threadPoolExecutor.submit(Synchronize::normalStaticMethod);
+        threadPoolExecutor.shutdown();
+    }
+
+    private static void notifyTest() {
         Synchronize sync = new Synchronize();
         sync.startWork();
         sync.prepareEnv();
@@ -45,7 +71,7 @@ public class Synchronize {
                         lock.wait();
                     }
                     System.out.println("线程 WorkThread 收到通知后继续执行");
-                } catch (InterruptedException e) {
+                } catch (InterruptedException ignored) {
                     
                 }
             }
@@ -62,6 +88,14 @@ public class Synchronize {
                 System.out.println("通知 WorkThread");
             }
         }
+    }
+
+    public static void normalStaticMethod() {
+        System.out.println("normalStaticMethod!!!");
+    }
+
+    public synchronized static void syncStaticMethod() {
+        System.out.println("syncStaticMethod!!!");
     }
     
 }
