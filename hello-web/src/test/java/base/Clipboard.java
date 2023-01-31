@@ -17,6 +17,8 @@ public class Clipboard {
         if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
             System.out.println(contents.getTransferData(DataFlavor.stringFlavor));
         }
+
+        // copy
         StringSelection selection = new StringSelection("idea copy!!!");
         systemClipboard.setContents(selection, selection);
     }

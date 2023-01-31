@@ -1,7 +1,6 @@
 package design.interceptor.chainofresponsibility;
 
 import design.interceptor.Interceptor;
-import edu.princeton.cs.algs4.StdOut;
 
 import java.lang.reflect.Method;
 

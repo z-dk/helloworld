@@ -1,10 +1,6 @@
 package algorithms.sort;
 
-import edu.princeton.cs.algs4.StdOut;
-
 import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <b>类 名 称</b> :  QuickSort<br/>
