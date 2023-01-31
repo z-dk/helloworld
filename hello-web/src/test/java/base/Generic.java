@@ -13,7 +13,10 @@ public class Generic {
     public static void main(String[] args) {
         SuperSample<? extends Parent> sample1 = new SuperSample<Parent>();
         SuperSample<? super Sub1> sample3 = new SuperSample<Parent>();
-        
+
+        System.out.println(Parent.class.isAssignableFrom(Sub1.class));
+        System.out.println(Sub1.class.isAssignableFrom(Parent.class));
+        System.out.println(Sub1.class.isAssignableFrom(Sub2.class));
 //        sample1.obj = new Parent();
 //        sample3.obj = new Parent();
     }
