@@ -20,6 +20,14 @@ public class Library {
         System.out.println("卖书成功！" + num);
         return true;
     }
+
+    private void seeBook() {
+        System.out.println("独有的查看操作");
+    }
+
+    public static void seeLibrary() {
+        System.out.println("查看书馆");
+    }
     
     @Override
     public String toString(){

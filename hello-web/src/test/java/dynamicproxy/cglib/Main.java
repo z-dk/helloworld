@@ -15,6 +15,7 @@ public class Main {
         Library target = BuyBookCglib.getProxy();
         boolean flag = target.sellBook(5);
         target.buyBook(3);
+
     }
     
 }
