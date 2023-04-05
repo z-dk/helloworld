@@ -10,7 +10,12 @@ package dynamicproxy.cglib;
  * <b>修改备注</b> :
  */
 public class Library {
-    
+
+    /**
+     * @param num 购买数量
+     * @return 是否购买成功
+     */
+    @SuppressWarnings("all")
     public boolean buyBook(int num){
         System.out.println("买书成功！"+num);
         return true;
@@ -19,6 +24,18 @@ public class Library {
     public boolean sellBook(int num) {
         System.out.println("卖书成功！" + num);
         return true;
+    }
+
+    public static void aboutMe() {
+        System.out.println("I'm a library interface");
+    }
+
+    public final void finalMethod() {
+        System.out.println("I'm from Library, final");
+    }
+
+    private void privateMethod() {
+        System.out.println("I'm private, only in Library");
     }
     
     @Override

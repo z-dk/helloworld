@@ -13,8 +13,16 @@ public class Main {
     
     public static void main(String[] args) {
         Library target = BuyBookCglib.getProxy();
-        boolean flag = target.sellBook(5);
-        target.buyBook(3);
+        System.out.println(target.sellBook(5));
+        System.out.println("***********************");
+        System.out.println(target.buyBook(3));
+        System.out.println("***********************");
+        target.finalMethod();
+        System.out.println("***********************");
+        System.out.println(target);
+        System.out.println("***********************");
+        // 直接调用static方法也同样无法被代理
+        //target.aboutMe();
     }
     
 }
