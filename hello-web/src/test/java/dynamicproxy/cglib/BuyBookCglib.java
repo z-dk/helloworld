@@ -1,5 +1,8 @@
 package dynamicproxy.cglib;
 
+import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
@@ -16,6 +19,8 @@ import java.lang.reflect.Method;
  * <b>修改备注</b> :
  */
 public class BuyBookCglib implements MethodInterceptor {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(BuyBookCglib.class);
     
     static Library getProxy(){
         Enhancer enhancer = new Enhancer();
@@ -26,9 +31,9 @@ public class BuyBookCglib implements MethodInterceptor {
     
     @Override
     public Object intercept(Object o, Method method, Object[] params, MethodProxy methodProxy) throws Throwable {
-        System.out.println("调用前");
+        LOGGER.info("调用前,参数:{}", JSON.toJSONString(params));
         Object result = methodProxy.invokeSuper(o, params);
-        System.out.println("调用后："+result);
+        LOGGER.info("执行结果:{}", JSON.toJSONString(result));
         return result;
     }
 }

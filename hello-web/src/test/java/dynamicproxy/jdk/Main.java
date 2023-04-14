@@ -1,8 +1,5 @@
 package dynamicproxy.jdk;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
-
 /**
  * <b>类 名 称</b> :  Main<br/>
  * <b>类 描 述</b> :  测试类<br/>
