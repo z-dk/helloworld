@@ -30,6 +30,7 @@ public class Synchronize {
     }
 
     private static void syncTest() {
+        Synchronize synchronize = new Synchronize();
         threadPoolExecutor.submit(() -> {
             System.out.println("start");
             synchronized (Synchronize.class) {
@@ -43,6 +44,8 @@ public class Synchronize {
         });
         threadPoolExecutor.submit(Synchronize::syncStaticMethod);
         threadPoolExecutor.submit(Synchronize::normalStaticMethod);
+        // 普通对象方法的锁为对象本身，锁住类不会影响该类的具体对象
+        threadPoolExecutor.submit(synchronize::normalMethod);
         threadPoolExecutor.shutdown();
     }
 
@@ -97,5 +100,8 @@ public class Synchronize {
     public synchronized static void syncStaticMethod() {
         System.out.println("syncStaticMethod!!!");
     }
-    
+
+    public synchronized void normalMethod() {
+        System.out.println("normalMethod!!!");
+    }
 }
