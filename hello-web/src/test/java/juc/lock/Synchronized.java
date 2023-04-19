@@ -16,9 +16,42 @@ import java.util.concurrent.Executors;
  */
 public class Synchronized {
 
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
-        
+    static final Object lock = new Object();
+
+    static ExecutorService executorService = Executors.newFixedThreadPool(4);
+
+
+    public static void main(String[] args) throws InterruptedException {
+        executorService.submit(Synchronized::syncObjTest);
+        Thread.sleep(3000);
+        syncObjNotifyTest();
+        executorService.shutdown();
+    }
+
+    static void syncObjNotifyTest() {
+        synchronized (lock) {
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + "syncObjTest success");
+            lock.notify();
+            System.out.println(threadName + "syncObjTest end and notify");
+        }
+    }
+
+    static void syncObjTest() {
+        synchronized (lock) {
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + "syncObjTest success");
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                System.out.println(threadName + "syncObjTest InterruptedException");
+                Thread.currentThread().interrupt();
+            }
+            System.out.println(threadName + "syncObjTest end");
+        }
+    }
+
+    static void staticSyncTest() {
         Number number = new Number();
 
         executorService.submit(Number::getZero);
@@ -27,7 +60,7 @@ public class Synchronized {
         executorService.submit(number::getTwo);
         executorService.submit(Number::getThree);
         executorService.submit(number::getFour);
-        
+
         executorService.shutdown();
     }
 
