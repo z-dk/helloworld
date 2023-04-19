@@ -17,6 +17,7 @@ public class Main {
         System.out.println("***********************");
         System.out.println(target.buyBook(3));
         System.out.println("***********************");
+        // final 方法可以被调用,但代理不会生效
         target.finalMethod();
         System.out.println("***********************");
         System.out.println(target);
