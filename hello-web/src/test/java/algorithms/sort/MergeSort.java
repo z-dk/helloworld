@@ -23,7 +23,7 @@ public class MergeSort {
     /**
      * 方法描述: 将数组a[lo..hi]排序
      * <br/>
-     * void
+     * 递归将有序的数组合并
      * <br/><b>创 建 人:</b>zdk
      * <br/><b>创建时间:</b>2020/11/22 16:28
      * <br/><b>修 改 人:</b>zdk
