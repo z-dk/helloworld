@@ -8,4 +8,9 @@ public class Main {
         Class<?> clazz = Class.forName("zdk.ccc", true, myClassLoader);
     }
 
+    public static void header() {
+        String[] str = new String[10];
+        //System.out.println(ClassLay.parseInstance(str).toPrintable());
+    }
+
 }

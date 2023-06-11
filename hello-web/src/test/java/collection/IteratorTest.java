@@ -1,11 +1,10 @@
 package collection;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <b>类 名 称</b> :  Iterator<br/>
@@ -19,18 +18,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class IteratorTest {
     
     public static void main(String[] args) throws InterruptedException {
-        Object object = new Object();
-//        iteratorTest();
-//        byte[] seed = SecureRandom.getSeed(1);
-        SecureRandom secureRandom = new SecureRandom();
-        synchronized (object) {
-            object.wait();
-        }
-        ReentrantLock lock = new ReentrantLock(true);
-        lock.lock();
-        for (int i = 0; i<10;i++) {
-            System.out.println(secureRandom.nextInt(10));
-        }
+        //iteratorTest();
+        iteratorCOWATest();
     }
     
     public static void iteratorTest(){
@@ -40,7 +29,22 @@ public class IteratorTest {
         while (iterator.hasNext()){
             String next = iterator.next();
             System.out.println(next);
-            if (next.equals("3")){
+            if (next.equals("5")){
+                list.remove(next);
+            }
+//            iterator.remove();
+        }
+        System.out.println("剩余list的大小："+list.size());
+    }
+
+    public static void iteratorCOWATest(){
+        List<String> list = new CopyOnWriteArrayList<>(Arrays.asList("1,2,3,4,5".split(",")));
+        System.out.println("初始list的大小："+list.size());
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()){
+            String next = iterator.next();
+            System.out.println(next);
+            if (next.equals("2")){
                 list.remove(next);
             }
 //            iterator.remove();

@@ -1,13 +1,39 @@
 package juc;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class VolatileTest {
+
+    ExecutorService executorService = Executors.newFixedThreadPool(2);
 
     public static void main(String[] args) {
         //visibility();
         //atomic();
         order();
+    }
+
+    /**
+     * happen-before的传递性
+     * 操作1 happens-before 操作2，
+     * 操作2 happens-before 操作3，
+     * 那么操作1 happens-before 操作3
+     * 这里只要set先执行,即使a未加volatile，也能保证d的值为1,a为5
+     */
+    static class A {
+        private int a = 0;
+        private volatile int c = 0;
+
+        private int d = 0;
+        public void set() {
+            a = 5;  // 操作1
+            c = 1;  // 操作2
+        }
+        public int get() {
+            d = c;  // 操作3
+            return a;   // 操作4
+        }
     }
 
     /**

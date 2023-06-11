@@ -15,10 +15,31 @@ public class JavaThread {
 
     public static void main(String[] args) {
         //isInterrupt();
-        interrupt();
+        //interrupt();
         
 
+        start2();
+    }
 
+    static void start2() {
+        Object obj = new Object();
+        Thread t = new Thread(() -> {
+            System.out.println("hello");
+            try {
+                synchronized (obj) {
+                    System.out.println("wait");
+                    obj.wait();
+                    System.out.println("wait end");
+                }
+            } catch (InterruptedException e) {
+                System.out.println("InterruptedException");
+            }
+        });
+        t.start();
+        t.interrupt();
+        System.out.println("world");
+        // 第二次调用start方法会抛出IllegalThreadStateException异常(状态不对)
+        //t.start();
     }
 
     static void isInterrupt() {

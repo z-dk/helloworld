@@ -26,6 +26,7 @@ public class SemaphoreTest {
         CyclicBarrier cyclicBarrier = new CyclicBarrier(3, () -> LOGGER.info("barrier"));
         // 信号量
         Semaphore semaphore = new Semaphore(3);
+        semaphore.acquireUninterruptibly(3);
         
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         executorService.submit(() -> {

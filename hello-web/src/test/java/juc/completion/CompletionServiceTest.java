@@ -39,7 +39,7 @@ public class CompletionServiceTest {
         while ((rs = service.take().get()) != null) {
             System.out.println("吃掉" + rs);
         }
-        
+        pool.shutdown();
     }
     
     
