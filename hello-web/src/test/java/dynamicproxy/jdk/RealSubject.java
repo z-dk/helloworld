@@ -15,4 +15,9 @@ public class RealSubject implements Subject {
     public void request() {
         System.out.println("这里是real对象");
     }
+
+    public void request(String name) {
+        System.out.println("这里是real对象的子方法，参数为：" + name);
+    }
+
 }
