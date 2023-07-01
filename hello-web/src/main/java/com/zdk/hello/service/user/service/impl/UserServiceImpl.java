@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zdk.hello.annotations.TargetDataSource;
 import com.zdk.hello.service.user.entity.User;
 import com.zdk.hello.service.user.entity.UserVo;
-import com.zdk.hello.service.user.mapper.UserMapper;
+import com.zdk.hello.mapper.zdkdata.UserMapper;
 import com.zdk.hello.service.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

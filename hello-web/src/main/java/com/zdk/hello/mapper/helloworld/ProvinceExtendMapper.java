@@ -1,4 +1,4 @@
-package com.zdk.hello.service.province.mapper;
+package com.zdk.hello.mapper.helloworld;
 
 import com.zdk.hello.annotations.TargetDataSource;
 import com.zdk.hello.service.province.entity.Province;

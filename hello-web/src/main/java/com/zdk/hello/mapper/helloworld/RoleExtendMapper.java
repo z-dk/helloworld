@@ -1,4 +1,4 @@
-package com.zdk.hello.service.role.mapper;
+package com.zdk.hello.mapper.helloworld;
 
 import org.apache.ibatis.annotations.Mapper;
 

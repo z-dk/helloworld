@@ -28,9 +28,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author zdk
  */
 @SpringBootApplication
-@MapperScan("com.**.mapper")
 @EnableLog
 @EnableAsync
+@MapperScan(basePackages = "com.zdk.hello.mapper.zdkdata", sqlSessionFactoryRef = "zdkSqlSessionFactory")
+@MapperScan(basePackages = "com.zdk.hello.mapper.helloworld", sqlSessionFactoryRef = "helloWorldSqlSessionFactory")
 public class HelloworldApplication implements CommandLineRunner, BeanFactoryAware, ApplicationContextAware {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(HelloworldApplication.class);

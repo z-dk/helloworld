@@ -1,8 +1,8 @@
 package com.zdk.hello.service.province.service.impl;
 
 import com.zdk.hello.service.province.entity.Province;
-import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
-import com.zdk.hello.service.province.mapper.ProvinceMapper;
+import com.zdk.hello.mapper.helloworld.ProvinceExtendMapper;
+import com.zdk.hello.mapper.helloworld.ProvinceMapper;
 import com.zdk.hello.service.province.service.ProvinceService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

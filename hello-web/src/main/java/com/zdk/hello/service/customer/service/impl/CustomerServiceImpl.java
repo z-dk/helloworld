@@ -1,7 +1,7 @@
 package com.zdk.hello.service.customer.service.impl;
 
 import com.zdk.hello.service.customer.entity.Customer;
-import com.zdk.hello.service.customer.mapper.CustomerMapper;
+import com.zdk.hello.mapper.helloworld.CustomerMapper;
 import com.zdk.hello.service.customer.service.ICustomerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

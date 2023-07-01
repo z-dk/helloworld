@@ -1,4 +1,4 @@
-package com.zdk.hello.service.role.mapper;
+package com.zdk.hello.mapper.helloworld;
 
 import com.zdk.hello.service.role.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

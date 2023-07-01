@@ -1,7 +1,7 @@
 package com.zdk.hello.service.province.controller;
 
 
-import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
+import com.zdk.hello.mapper.helloworld.ProvinceExtendMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

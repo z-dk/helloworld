@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -73,15 +74,37 @@ public class DataSourceConfig {
         return dataSource;
     }
 
+    //@Bean
+    //public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+    //    MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
+    //    // 配置数据源，此处配置为关键配置，如果没有将 dynamicDataSource作为数据源则不能实现切换
+    //    sqlSessionFactory.setDataSource(dynamicDataSource());
+    //    // 扫描Model
+    //    sqlSessionFactory.setTypeAliasesPackage("com.zdk.**.entity");
+    //    // 指定mapperLocations路径,不然xml的sql找不到,我也太牛了吧,这问题都能找到^_^
+    //    sqlSessionFactory.setMapperLocations(mybatisPlusProperties.resolveMapperLocations());
+    //    return sqlSessionFactory.getObject();
+    //}
+
     @Bean
-    public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
+    public SqlSessionFactory helloWorldSqlSessionFactory() throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
-        // 配置数据源，此处配置为关键配置，如果没有将 dynamicDataSource作为数据源则不能实现切换
-        sqlSessionFactory.setDataSource(dynamicDataSource());
-        // 扫描Model
+        sqlSessionFactory.setDataSource(helloWorldDataSource());
         sqlSessionFactory.setTypeAliasesPackage("com.zdk.**.entity");
-        // 指定mapperLocations路径,不然xml的sql找不到,我也太牛了吧,这问题都能找到^_^
-        sqlSessionFactory.setMapperLocations(mybatisPlusProperties.resolveMapperLocations());
+        org.springframework.core.io.Resource[] resources = new PathMatchingResourcePatternResolver()
+                .getResources("classpath*:config/mapper/helloworld/**/*.xml");
+        sqlSessionFactory.setMapperLocations(resources);
+        return sqlSessionFactory.getObject();
+    }
+
+    @Bean
+    public SqlSessionFactory zdkSqlSessionFactory() throws Exception {
+        MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
+        sqlSessionFactory.setDataSource(zdkDataDataSource());
+        sqlSessionFactory.setTypeAliasesPackage("com.zdk.**.entity");
+        org.springframework.core.io.Resource[] resources = new PathMatchingResourcePatternResolver()
+                .getResources("classpath*:config/mapper/zdkdata/**/*.xml");
+        sqlSessionFactory.setMapperLocations(resources);
         return sqlSessionFactory.getObject();
     }
 
