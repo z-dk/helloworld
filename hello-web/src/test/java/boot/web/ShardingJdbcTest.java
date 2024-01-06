@@ -2,10 +2,10 @@ package boot.web;
 
 import com.zdk.hello.HelloworldApplication;
 import com.zdk.hello.service.customer.entity.Customer;
-import com.zdk.hello.service.customer.mapper.CustomerMapper;
+import com.zdk.hello.mapper.helloworld.CustomerMapper;
 import com.zdk.hello.service.province.entity.Province;
-import com.zdk.hello.service.province.mapper.ProvinceExtendMapper;
-import com.zdk.hello.service.role.mapper.RoleExtendMapper;
+import com.zdk.hello.mapper.helloworld.ProvinceExtendMapper;
+import com.zdk.hello.mapper.helloworld.RoleExtendMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
