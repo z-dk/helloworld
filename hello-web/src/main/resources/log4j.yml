@@ -1,0 +1,86 @@
+log4j:
+  appender:
+#    rollingFile:
+#      MaxFileSize: 200KB
+#      Append: 'true'
+#      layout:
+#        nodeValue: org.apache.log4j.PatternLayout
+#        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+#      nodeValue: org.apache.log4j.RollingFileAppender
+#      MaxBackupIndex: '50'
+#      Threshold: DEBUG
+#      ImmediateFlush: 'true'
+#      File: D:/logs/log.log4j
+    mail:
+      To: xxx@mail.com
+      layout:
+        nodeValue: org.apache.log4j.PatternLayout
+        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+      Threshold: FATAL
+      nodeValue: org.apache.log4j.net.SMTPAppender
+      From: xxx@mail.com
+      SMTPHost: mail.com
+      Subject: Log4J Message
+      BufferSize: '10'
+    im:
+      password: password
+      layout:
+        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+        nodeValue: org.apache.log4j.PatternLayout
+      username: username
+      recipient: corlin@cybercorlin.net
+      host: mail.cybercorlin.net
+      nodeValue: net.cybercorlin.util.logger.appender.IMAppender
+#    dailyFile:
+#      DatePattern: '''.''yyyy-MM-dd'
+#      nodeValue: org.apache.log4j.DailyRollingFileAppender
+#      layout:
+#        nodeValue: org.apache.log4j.PatternLayout
+#        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+#      Threshold: DEBUG
+#      ImmediateFlush: 'true'
+#      File: D:/logs/log.log4j
+#      Append: 'true'
+    console:
+      nodeValue: org.apache.log4j.ConsoleAppender
+      Target: System.out
+      layout:
+        nodeValue: org.apache.log4j.PatternLayout
+        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+      Threshold: INFO
+      ImmediateFlush: 'true'
+#    logFile:
+#      Threshold: INFO
+#      layout:
+#        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+#        nodeValue: org.apache.log4j.PatternLayout
+#      ImmediateFlush: 'true'
+#      nodeValue: org.apache.log4j.FileAppender
+#      File: D:\Projects\helloworld\hello-web\target\info.log
+#      Append: 'true'
+    database:
+      user: root
+      nodeValue: org.apache.log4j.jdbc.JDBCAppender
+      layout:
+        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+        nodeValue: org.apache.log4j.PatternLayout
+      URL: jdbc:mysql://localhost:3306/test
+      sql: 'INSERT INTO LOG4J (Message) VALUES(''=[%-5p] %d(%r) --> [%t] %l: %m %x
+        %n'')'
+      password: ''
+      driver: com.mysql.jdbc.Driver
+    LF5_APPENDER:
+      MaxNumberOfRecords: '2000'
+      nodeValue: org.apache.log4j.lf5.LF5Appender
+#    socket:
+#      layout:
+#        ConversionPattern: '[%-5p] %d(%r) --> [%t] %l: %m %x %n'
+#        nodeValue: org.apache.log4j.PatternLayout
+#      nodeValue: org.apache.log4j.RollingFileAppender
+#      Port: '5001'
+#      RemoteHost: localhost
+#      LocationInfo: 'true'
+  additivity:
+    org:
+      apache: 'true'
+  rootLogger: INFO,console

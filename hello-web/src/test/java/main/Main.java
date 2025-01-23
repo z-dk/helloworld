@@ -1,16 +1,151 @@
 package main;
 
-import com.zdk.hello.util.CommonServiceUtil;
-
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(CommonServiceUtil.queryWeatherByCityCode(110112));
+        int a = Integer.MAX_VALUE;
+        long b = a * a;
+        long count = Arrays.stream(new int[]{6}).filter(o -> o < 1).count();
+        new int[]{(int) count};
+        System.out.println(b);
+        System.out.println(validSubstringCount("dcbdcdccb", "cdd"));
+    }
+    static int idx = 0;
+    static PriorityQueue<Integer> index = new PriorityQueue<>();
+    public static long validSubstringCount(String word1, String word2) {
+        int l = word2.length();
+        Map<Character, List<Integer>> base = new HashMap<>();
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < l; i++) {
+            char c = word2.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        int m = word1.length();
+        for(int i = 0; i < m; i++) {
+            char c = word1.charAt(i);
+            List<Integer> pos = base.getOrDefault(c, new ArrayList<>());
+            pos.add(i);
+            base.put(c, pos);
+        }
+        return get(word1, map, base, idx, m);
+    }
+
+    private static int get(String word1, Map<Character, Integer> map, Map<Character, List<Integer>> base, int limit, int m) {
+        int res = 0;
+        int left = 1000000, right = 0;
+        for(Map.Entry<Character, Integer> entry : map.entrySet()) {
+            Character c = entry.getKey();
+            Integer ct = entry.getValue();
+            List<Integer> pos = base.get(c);
+            if (pos == null || pos.size() < ct || pos.get(pos.size() - ct) < limit) {
+                return res;
+            }
+            int l1 = 0, r1 = 0;
+            for(int i = 0; i < pos.size(); i++) {
+                if (pos.size() - i < ct) {
+                    return res;
+                }
+                if (pos.get(i) < limit) {
+                    continue;
+                }
+                l1 = pos.get(i);
+                r1 = pos.get(i + ct - 1);
+                for (int j = i; j <= i + ct - 1; j++) {
+                    index.offer(pos.get(j));
+                }
+                break;
+            }
+            left = Math.min(left, l1);
+            right = Math.max(right, r1);
+        }
+        res = (left + 1 - limit) * (m - right);
+        while(right < m) {
+            index.poll();
+            char c = word1.charAt(left);
+            List<Integer> pos = base.get(c);
+            int nr = find(pos, left) + map.get(c);
+            if (nr >= pos.size()) {
+                return res;
+            }
+            nr = pos.get(nr);
+            index.offer(nr);
+            nr = Math.max(nr, right);
+            int nl = index.peek();
+            int currct = (m - nr) * (nl - left);
+            res += currct;
+            left = nl;
+            right = nr;
+        }
+
+
+        return res;
+    }
+
+    private static int find(List<Integer> pos, int val) {
+        int l = 0, r = pos.size() - 1;
+        int mid = (l + r) / 2;
+        while (l <= r) {
+            if(pos.get(mid) == val) {
+                return mid;
+            } else if (pos.get(mid) > val) {
+                r = mid - 1;
+            } else {
+                l = mid + 1;
+            }
+            mid = (l + r) / 2;
+        }
+        return mid;
+    }
+
+    public static long findMaximumNumber(long k, int x) {
+        int pos = 0;
+        long acc = 0, curr = 0;
+        for(int i = 1; i <= 32; i++) {
+            if (i % x == 0) {
+                pos += (1 << (i - 1));
+            }
+        }
+        long no = 1 << x;
+        for(long i = 1; i <= Long.MAX_VALUE; i += no) {
+            long ct = i & pos;
+            curr = calc(ct);
+            for (int j = 0; j < no; j++) {
+                acc += curr;
+                if (acc > k) {
+                    return i + j - 1;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public static long calc(long num) {
+        long ct = 0;
+        while (num > 0) {
+            num &= (num - 1);
+            ct++;
+        }
+        return ct;
     }
 
     boolean[][] foot;
+
+    public static int maximizeGreatness(int[] nums) {
+        List<Integer> orders = Arrays.stream(nums).sorted().boxed().collect(Collectors.toList());
+        int res = 0;
+        Integer pre = 0;
+        for (int i = 1; i < orders.size(); i++) {
+            Integer curr = orders.get(i);
+            if (curr > orders.get(pre)) {
+                res++;
+                pre++;
+            }
+        }
+        return res;
+    }
 
     public int movingCount(int m, int n, int k) {
         foot = new boolean[m][n];
